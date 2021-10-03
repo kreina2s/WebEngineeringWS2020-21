@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="../css/layout.css">
+  <title>Web Engineering (kreina2s)</title>
+</head>
+<body>
+  <div class="container-top">
+    <div class="container-top-headline">
+      <a href="../index.html">
+        <h1>Web Engineering</h1>
+	    <p>Präsentation aller Übungsaufgaben von kreina2s</p>
+      </a>
+    </div>
+	<div class="container-top-dropdown">
+	  <button class="container-top-dropdown-dropbutton">Übungen</button>
+	  <div class="container-top-dropdown-content">
+	    <div class="container-top-dropdown-content-link">
+	      <a href="u1.html">Übung 1</a>
+		</div>
+		<div class="container-top-dropdown-content-link">
+	      <a href="#">Übung 2</a>
+		</div>
+		<div class="container-top-dropdown-content-link">
+	      <a href="#">Übung 3</a>
+		</div>
+		<div class="container-top-dropdown-content-link">
+	      <a href="#">Übung 4</a>
+		</div>
+	  </div>
+	</div>
+  </div>
+  
+  <div class="content">
+    <h2>1.1 Fachliche Argumentation über Erfolgsprinzipien des WWW</h2>
+	<h3>Mit welchen fachlichen Argumenten wurde das WWW-Proposal von TBL abgelehnt?</h3>
+    <p>Zunächst hat TBLs Vorgesetzter die Wagheit seines Konzeptes nicht verstanden, 
+	da er es mit der Evolvierbarkeit verwechselt hat. TBL strebte eine Evolvierbarkeit 
+	unterschiedlicher Technologien unabhängig voneinander an (HTTP, HTML, URI). Diese 
+	Weiterentwicklung sollte ohne zentrale Kontrolle erfolgen.</p>
+	<p>Laut eines ehemaligen Mitgliedes des Programmkomitees der weltgrößten 
+	Hypertext-Konferenz hatte die Hypertext-Community den Eindruck, dass sie in der 
+	Wissenschaft schon weiter vorangeschritten war. Das Konzept von TBL sollte ein 
+	„Rückschritt gewesen sein“.</p>
+	<p>Alan Kay nennt als Gegenargument das fehlen der mathematischen Rigorosität, 
+	darüber hinaus sollte es bei TBLs Proposal möglich sein, dass „broken links“ 
+	(=Hyperlinks, die zu nichts führen) existieren könnten. Das WWW würde verteilte 
+	Texte involvieren, Kay würde lieber verteilte Objekte sehen – generell begründet 
+	er die Objekt-Orientierung mit den Aussagen:<p>
+	<p style="font-style: italic">„So etwas wie HTML ist genau das, was wir verhindern 
+	wollten.“</p>
+	<p style="font-style: italic">„Texte ohne klar definierte Semantik sind die Ursache 
+	allen Übels.“</p>
+	<p style="font-style: italic">„Die Geschichte des WWW ist eine lange Liste von 
+	Patches.“ (siehe Vorlesung)</p>
+	
+	<h3>Was sind die fachlichen Argumente, warum das WWW dennoch ein Erfolg wurde?</h3>
+    <p>Zum Erfolg des World Wide Web hat vor allem dazu beigetragen, dass weder TBL 
+	noch das CERN Institut sich um Patente bemüht und ihre Erfindungen dadurch 
+	geschützt haben. Das hat Entwickler und Unternehmen dazu motiviert, Browser, 
+	Webserver-Software und Webseiten-Inhalte zu entwickeln.</p>
+	<p>Um zu verhindern, dass eine Vielzahl von Webstandards entstehen, gründete 
+	TBL 1994 am MIT das W3C (World Wide Web Consortium). Dieses kümmert sich um die 
+	Standardisierung der Techniken im WWW, wie z.B. HTML, XHTML, XML, CSS, usw.</p>
+	
+	<h3>Was wäre der Preis für die garantierte Verhinderung von “broken links”?</h3>
+	<p>Der Preis bei der Referentiellen Integrität liegt vor allem im Bereich der 
+	Rechnerressourcen, insbesondere der Zeit. Bei der Überprüfung einer relationalen 
+	Datenbank wird also Zeit beansprucht. Weiterhin wird eine zentrale Kontrolle 
+	benötigt, um broken Links überhaupt verhindern zu können.</p>
+	<hr>
+	
+    <h2>1.2. HTTP</h2>
+	<h3>Sie bekommen im Browser den HTTP Status Code 200. Was bedeutet das?</h3>
+	<p>Status Code 200 → OK</p>
+	<p>Hierbei handelt es sich um einen „Success“-Statuscode.</p>
+	<p>Dies bedeutet, dass bei der Anfrage alles erfolgreich bearbeitet wurde 
+	und dies bei der Antwort des HTTP Daemons übertragen wurde.</p>
+	
+	<h3>Sie bekommen im Browser den HTTP Status Code 301. Was hat das zu bedeuten?</h3>
+	<p>Status Code 301 → Moved Permanently</p>
+	<p>Die angefragte Ressource ist unter der vorhandenen Adresse nicht mehr zu 
+	erreichen, die alte Adresse ist nicht länger gültig.</p>
+	<p>Es erfolgt ein Redirect über das „Location“-Feld im Header, 
+	was zur neuen Adresse führt.</p>
+	
+	<h3>Sie bekommen im Browser den HTTP Status Code 400. Was hat das zu bedeuten? Was 
+	können Sie dagegen tun?</h3>
+	<p>Status Code 400 → Bad Request</p>
+	<p>Wird dann geworfen, wenn der Server die Anfrage nicht bearbeiten konnte. 
+	Dies basiert allerdings auf einem client-seitigen Fehler, zum Beispiel, 
+	wenn eine fehlerhafte Syntax angegeben wurde.<br>
+	Beispiel: Webadresse falsch eingegeben.</p>
+	<p>In jedem Fall muss auf der Client-Seite der Fehler behoben werden, 
+	bevor mit dem Prozess fortgefahren werden kann. Wurde beispielsweise die URL 
+	falsch eingegeben, muss diese zuvor korrigiert werden.
+	</p>
+
+	<h3>Sie bekommen im Browser den HTTP Status Code 403. Was hat das zu bedeuten? 
+	Was können Sie dagegen tun?</h3>
+	<p>Status Code 403 → Forbidden</p>
+	<p>Dieser Code wird geworfen, sollte der Client nicht die nötigen Rechte haben, 
+	um auf eine Adresse zuzugreifen. Der Server hat die Anfrage verstanden, 
+	weigert sich aber, sie zuzulassen.</p>
+	<p>Kann auch passieren, wenn eine als HTTPS konfigurierte seite mit HTTP 
+	aufgerufen wurde.</p>
+	<p>Der Zustand ist dauerhaft und kann nur von einem entsprechenden 
+	Netzadministrator beseitigt werden. Die Rechte eines Nutzers müssten 
+	geändert werden, um auf die gewünschte Ressource zugreifen zu können.</p>
+	
+	<h3>In einer Webanwendung benötigen Sie eine OPTIONS-Anfrage, die die 
+	Optionen des Servers vor dem eigentlichen Zugriff erfragen soll. 
+	Aus Performanzgründen soll die Abfrage jedoch cacheable sein. Wie 
+	könnten Sie dafür eine Lösung angehen?</h3>
+	<p>OPTIONS-Abfragen sind nicht cacheable.</p>
+	<hr>
+	
+	<h2>1.3. HTML-Literatur lesen und Fragen beantworten</h2>
+	<h3>Was ist HTML?</h3>
+	<p>Die Abkürzung HTML steht für Hyper Text Markup Language. 
+	HTML ist eine sogenannte Auszeichnungs-Sprache und dient dem textbasierten 
+	Strukturieren von Dokumenten. Sie wird vor allem für das Erstellen von Webseiten 
+	genutzt. HTML ist kontextfrei. Verschiedene Tags werden genutzt, um einem Browser klar zu machen, wie er den 
+	Content darstellen muss. Mit diesen kann Text strukturiert, Bilder dargestellt, 
+	Anchor-Links eingefügt oder Elemente formatiert werden. Tags werden immer in „< >“ 
+	Klammern verpackt und müssen stets mit „</>“ beendet werden.</p>
+	<p>Beispiel: &lt;p&gt;Test&lt;/p&gt;</p>
+	<p>HTML Code wird gewöhnlicherweise in einer Datei gespeichert, die von Browsern 
+	gelesen und grafisch dargestellt werden können.</p>
+	<p>HTML-Dokumente werden stets mit &lt;!DOCTYPE html&gt; eingeleitet. HTML-Dokumente 
+	sind typischerweise in &lt;head&gt; und &lt;body&gt; unterteilt. Im Head können Titel und 
+	Metadaten stehen, der Body ist das, was im Browser tatsächlich zu sehen ist.</p>
+	<p>Aufgrund der Tatsache, dass HTML sehr simpel und intuitiv aufgebaut ist, ist HTML 
+	sehr beliebt.</p>
+	
+	<h3>Wie kann man eine geschachtelte geordnete Liste der Schachtelungstiefe 3 erzeugen?</h3>
+	<p>Generell: Für geordnete Listen wird das Tag &lt;ol&gt; genutzt. Um Listeneinträge 
+	zu machen, nutzen wir das &lt;li&gt;-Tag.</p>
+	<p>Für eine Liste der Schachtelungstiefe 3 müssen wir darauf achten, jeweils an der 
+	gewünschten Stelle eine neue geordnete Liste mit einem weiteren &lt;ol&gt;-Tag einzuleiten. 
+	Wir verschachteln also mehrere &lt;ol&gt;-Tags ineinander, bis wir an der gewünschten 
+	Tiefe angelangt sind.</p>
+
+	<h3>Wie ist eine HTML-Tabelle aufgebaut?</h3>
+	<p>Jede HTML-Tabelle ist ein Zeilen (waagerecht) und Spalten (senkrecht) gegliedert. Der Aufbau 
+	wird mit dem &lt;table&gt;-Tag gestartet. Dieses leitet eine Tabelle ein.</p>
+	<p>Eine neue Zeile in der Tabelle kann mit dem Tag &lt;tr&gt; (table row) eingefügt werden. Innerhalb 
+	dieses Tags werden weitere &lt;td&gt; (table data) Elemente genutzt, um die Tabelle mit Werten zu füllen.</p>
+	<p>Optional kann die erste Zeile mit &lt;th&gt; (table header) Elementen gefüllt werden. 
+	Diese dienen dann als einfacher Header einer Tabelle.</p>
+	
+	<h3>Welche Konventionen sollte man bei Pfaden und Dateinamen beachten?</h3>
+	<p>HTML-Dateien enden stets auf .html oder .htm.</p>
+	<p>HTML-Dateien mit Server Side Includes erhalten die Endung .shtml oder .shtm.</p>
+	<p>PHP Programmcode Dateien erhalten die Endung .php.</p>
+	<p>Default-Dateien werden „index.html“/“index.htm“ benannt.</p>
+	<p>Prinzip: „Cool URIs don't change!“ → URIs so anlegen, dass sie niemals geändert 
+	werden müssen und stets aktuell bleiben und die Bedeutung dieser aus dem Namen 
+	bereits herausgelesen werden kann (Eindeutigkeit).</p>
+	<p>Unterverzeichnisse sollten sinnvoll benannt werden. Bilddateien sollten beispielsweise 
+	unter /img/ hinterlegt werden, Script-Dateien unter /script/.</p>
+	<p>Am Einfachsten ist es, dem ISO-Standard zur Identifizierung von Ressourcen aller Art 
+	in einem weltweiten „universellen Informationsraum“ zu folgen.</p>
+	
+	<h3>Wie baut man in HTML ein Menü?</h3>
+	<p>Je nachdem, was für eine Art von Menü man realisieren möchte, gibt es verschiedene 
+	Methoden, ein  Menü zu erstellen.</p>
+	<p>Ein einfaches Dropdown-Menü lässt sich mit der Hilfe des &lt;select&gt;-Tags in 
+	Kombination mit mehreren verschachtelten &lt;option&gt;-Tags erstellen.</p>
+	<p>Select wird dabei genutzt, um das Dropdown-Menü einzuleiten, die Option Tags dienen 
+	dann als Auswahlmöglichkeiten des Menüs.</p>
+	<p>Eine weitere Möglichkeit wäre es, verschachtelte Listen zu nutzen. Wir eröffnen mit 
+	einem &lt;nav&gt;-Element, um ein Menü als Navigationsleiste einzuleiten und 
+	verschachteln daraufhin &lt;ul&gt; und &lt;li&gt;-Elemente, um das Menü aufzubauen. 
+	Dieses Menü würde wie eine Art „Bullet-Point“-Liste aussehen. 
+    Unterpunkte in dieser Liste könnten mit weiteren Verschachtelungs-Stufen, die durch 
+    &lt;ul&gt;-Tags eingeleitet werden, erreicht werden. </p>
+	<p>Zuletzt gibt es auch das eigentliche &lt;menu&gt;-Tag, was eine Liste/ein Menü von Befehlen 
+	definiert und ebenfalls für Kontextmenüs, Symbolleisten, etc. genutzt wird. Die Liste wird mit 
+	&lt;menu&gt; eingeleitet, gefolgt von einer Reihe von &lt;li&gt;- oder &lt;menuitem&gt;-Elementen.</p>
+
+	<h3>Welche Attribute sollte man bei Bildern wie verwenden?</h3>
+	<p>&lt;img&gt;-Tags haben zwei notwendige Attribute:</p>
+	<p>src: referenziert den Pfad zum Bild</p>
+	<p>alt: Textdisplay, wenn das Bild nicht geladen werden kann</p>
+	<p>&lt;width&gt; und &lt;height&gt; können sich ebenfalls als nützlich erweisen, 
+	wenn man das Bild unter Umständen anderweitig skalieren möchte.</p>
+	<hr>
+	
+	<h2>1.4 HTML Wireframe</h2>
+	<h3>Bilden Sie das folgende Wireframe nach:</h3>
+	<a href="wireframe01.html"  target="_blank" rel="noopener noreferrer"><img src="../img/wireframe01.jpg" alt="wireframe01" width="25%" height="25%"></a>
+	<p style="font-size: 12px">Klicken Sie auf das Bild, um zur externen Seite mit dem implementierten HTML-Code zu gelangen.<br>Es wird automatisch ein neuer Tab geöffnet.</p>
+	
+  </div>
+  
+  <div class="post-content">
+	<a class="arrow" href="../index.html"><img src="../img/arrow_left.png" alt="Pfeil nach links"></a>
+	<a class="arrow" href="#"><img src="../img/arrow_right.png" alt="Pfeil nach rechts"></a>
+  </div>
+</body>
+</html>
