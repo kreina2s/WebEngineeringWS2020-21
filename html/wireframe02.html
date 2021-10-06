@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Survey Form FreeCodeCamp Uebung</title>
+
+  <style>
+    * { font-family: Helvetica, sans-serif; }
+	header { text-align: center; }
+    body { background-color: #b2d6d1; }
+    #survey { margin: 0 auto; border:1px solid #fafafa; border-radius: 5px; background-color: #fafafa; width: 50%; }
+	#description { padding: 15px; text-align: center; }
+    .textInput { margin-left: 1em; width: 250px; height: 30px; }
+	
+	.informationInput { margin-bottom: 20px; padding-left: 40%; }
+	.informationInput label { display: inline-block; text-align: right; width: 60px;}
+	
+	.informationInputLong { display: flex; margin-bottom: 20px; padding-left: 70px; }
+	.informationInputLong label { display: inline-block; text-align: right; width: 350px;}
+	.informationInputLong select { margin-left: 1.3em; width: 130px; height: 30px;}
+	
+	.longLabel { display: inline-block; text-align: right; width: 330px;}
+	
+	.radioButtons { display: flex; flex-direction: column; }
+	.radioButtonsLabel { display: flex; margin-left: 1em; margin-bottom: 10px; width: 160px; } 
+	.radioButtonsLabel label { text-align: left; }
+  </style>
+
+</head>
+<body>
+  <header>
+    <h1 id="title">Survey Form</h1>
+  </header>
+  
+  <form id="survey" action="#">
+	<p id="description">Let us know how we can improve freeCodeCamp</p>
+	
+	<div class="informationInput">
+	  <label id="labelName">* Name:</label>
+	  <input id="inputName" class="textInput" type="text" placeholder="Enter your Name">
+	</div>
+	
+	<div class="informationInput">
+	  <label id="labelEmail">* Email:</label>
+	  <input id="inputEmail" class="textInput"  type="text" placeholder="Enter your Email">
+	</div>
+	
+	<div class="informationInput">
+	  <label id="labelAge">* Age:</label>
+	  <input id="inputAge" class="textInput"  type="number" placeholder="Age">
+	</div>
+
+	<div class="informationInputLong">
+	  <label id="labelRole">Which option best describes your current role?</label>
+	  <select id="dropdownRole">
+		<option value="Student">Student</option>
+		<option value="Teacher">Teacher</option>
+		<option value="Professor">Professor</option>
+		<option value="Worker">Worker</option>
+	  </select>
+	</div>
+
+	<div class="informationInputLong">
+      <label id="labelRecommend" class="longLabel">* How likely is that you would recommend freeCodeCamp to a friend?</label>
+	  <div class="radioButtons">
+		<div class="radioButtonsLabel">
+	      <input id="inputDefinitely" name="recommend" value="Definitely" type="radio">
+	      <label>Definitely</label>
+	    </div>
+	    <div class="radioButtonsLabel">
+	      <input id="inputMaybe" name="recommend" value="Maybe" type="radio">
+	      <label>Maybe</label>
+		</div>
+		<div class="radioButtonsLabel">
+	      <input id="inputNotSure" name="recommend" value="Not sure" type="radio">
+	      <label>Not sure</label>
+		</div>
+	  </div>
+	</div>
+
+	<div class="informationInputLong">
+	  <label id="labelLike">What do you like most in FCC:</label>
+	  <select id="dropdownLike">
+		<option disabled selected value="">Select an option</option>
+		<option value="its fun">It's fun</option>
+		<option value="its helpful">It's helpful</option>
+	  </select>
+	</div>
+
+	<div class="informationInputLong">
+      <label id="labelFuture">Things that should be improved in the future 
+	    <span class="note">(Check all that apply):</span>
+	  </label>
+	  <div class="radioButtons">
+	    <div class="radioButtonsLabel">
+		  <input name="future" value="Front-End-Projects" type="checkbox">
+		  <label id="labelFrontEnd">Front-End-Projects</label>
+		</div>
+	    <div class="radioButtonsLabel">
+		  <input name="future" value="Back-End-Projects"  type="checkbox">
+	      <label id="labelBackEnd">Back-End-Projects</label>
+		</div>
+	    <div class="radioButtonsLabel">
+		  <input name="future" value="Data Visualization" type="checkbox">
+          <label id="labelDataVis">Data Visualization</label>
+		</div>
+	  </div>
+	</div>
+  </form>
+</body>
+</html>
