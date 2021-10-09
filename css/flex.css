@@ -1,0 +1,138 @@
+/*kreina2s*/
+body { 
+	font-family: Calibri;
+	background: url(../img/background_image.png);
+}
+
+.container {
+	display: grid;
+	grid-auto-columns: 1fr;
+	grid-template-columns: 1fr 0.01fr 0.9fr 0.01fr 4.3fr 0.01fr 1fr;
+	grid-template-rows: 0.2fr 2.7fr 0.01fr;
+	height: 98vh;
+}
+
+.header { 
+	background-color: rgb(234, 121, 95);
+	color: white;
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+	line-height: 5px;
+	padding: 3vh;
+	
+	grid-area: 1 / 2 / 2 / 7;
+}
+.header h2 {
+	font-size: 15px;
+}
+
+.header a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.navigation {
+	background-color: white;
+	color: rgb(234, 121, 95);
+	font-size: 20px;
+	grid-area: 2 / 3 / 3 / 4;
+	min-width: 10vh;
+	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 3vh;
+	gap: 2vh;
+}
+
+.navigation a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.navigation a:hover {
+	color: rgb(245, 189, 176);
+}
+
+.content {
+	background-color: white;
+	grid-area: 2 / 5 / 3 / 6;
+	
+	display: flex;
+	flex-direction: column;
+	padding: 3vh;
+	gap: 0px;
+}
+
+.content h2 {
+	text-decoration: underline;
+}
+
+.content td {
+	text-align: center;
+}
+
+.divider {
+	background-color: rgb(234, 121, 95);
+	min-width: 0.1vh;
+}
+
+.left-divider {
+	grid-area: 2 / 2 / 3 / 3;
+}
+
+.mid-divider {
+	grid-area: 2 / 4 / 3 / 5;
+}
+
+.right-divider {
+	grid-area: 2 / 6 / 3 / 7;
+}
+
+.bottom-divider {
+	grid-area: 3 / 2 / 4 / 7;
+}
+
+/* Smartphone / small */
+@media (max-width: 600px) {
+	
+.container {
+    grid-auto-columns: 1fr; 
+	grid-template-columns: 0.01fr 4.8fr 0.01fr;
+	grid-template-rows: 0.2fr 0.25fr 0.01fr 3.9fr 0.01fr;
+}
+
+.header {
+	grid-area: 1 / 1 / 2 / 4;
+}
+
+.navigation {
+	grid-area: 2 / 2 / 3 / 3;
+	flex-direction: row;
+	justify-content: center;
+	padding-top: 0vh;
+}
+
+.left-divider {
+	grid-area: 2 / 1 / 5 / 2;
+}
+
+.mid-divider {
+	grid-area: 3 / 2 / 4 / 3;
+	min-height: 0.2vh;
+}
+
+.content {
+	grid-area: 4 / 2 / 5 / 3;
+}
+
+.right-divider {
+	grid-area: 2 / 3 / 5 / 4;
+}
+
+.bottom-divider {
+	grid-area: 5 / 1 / 6 / 4;
+	min-height: 0.2vh;
+}
+}

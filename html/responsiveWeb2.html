@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title>Responsive Web Design</title>
+    <style>
+	  .content {
+	    display: grid;
+		height: 100%;
+		min-width: 400px;
+		min-height: 98vh;
+		grid-template-rows: 1fr 1fr 6fr 1fr;
+	  }
+	  .red {
+	    background-color: red;
+	  }
+	  .green {
+	    background-color: green;
+	  }
+	  .blue {
+	    background-color: blue;
+	  }
+	  .purple {
+	    background-color: purple;
+	  }
+	  
+	  /* Smartphone/Small */
+	  @media (min-width: 320px)  {
+		.content {
+			grid-template-rows: 1fr 1fr 6fr 1fr;
+		}
+	  }
+	  
+	  /* Tablet/Medium */
+	  @media (min-width: 600px) {
+	    .content {
+		  grid-template-rows: 1fr 5fr 1fr;
+		  grid-template-columns: 2fr 6fr;
+		}
+		.red, purple {
+		  grid-column: span 2;
+		}
+		.red, .green, .blue, .purple{
+		  margin: 5px;
+		}
+		.purple {
+		  grid-column-start: 1;
+		  grid-column-end: 3;
+		}
+	  }
+	  
+	  /* Desktop/large */
+	  @media (min-width: 1025px) {
+	    .content {
+		  grid-template-rows: 1fr 5fr;
+		  grid-template-columns: 1fr 3fr 1fr;
+		}
+		.red {
+		  grid-column: span 3;
+		}
+		.red, .green, .blue, .purple{
+		  margin: 10px;
+		}
+		.purple {
+		  grid-column-start: auto;
+		  grid-column-end: auto;
+		}
+	  }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <div class="red"></div>
+      <div class="green"></div>
+      <div class="blue"></div>
+      <div class="purple"></div>
+    </div>
+  </body>
+</html>

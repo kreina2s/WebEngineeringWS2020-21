@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title>Responsive Web Design</title>
+    <style>
+      .content {
+        display: flex;
+        flex-direction: column;
+		padding: 20px;
+      }
+      .red {
+        background: red;
+      }
+	  .blue {
+        background: blue;
+      }
+      .green {
+        background: green;
+      }
+      .purple {
+        background: purple;
+      }
+	  
+	  /* Desktop/large */
+	  @media (max-width: 1920px) {
+	    .content {
+          flex-direction: row;
+          flex-wrap: wrap;  
+        } 
+        .red {
+          width: 100%;
+	  	  min-height: 120px;
+		  margin: 10px;
+        }
+        .blue {
+          flex: 2;
+          order: 2;
+          min-height: 80vh;
+		  margin: 10px;
+        }
+        .green {
+          flex: 0.5; 
+          order: 1;
+		  margin: 10px;
+        }
+        .purple {
+          flex: 0.5;
+          order: 3; 
+		  margin: 10px;
+        }
+      }
+	  
+	  /* Tablet/Medium */
+	  @media (max-width: 768px) {
+	    .content {
+		  padding: 10px;
+		}
+	  
+	    .red {
+		  margin: 5px;
+		}
+	  
+		.green {
+		  flex: 0.8;
+		  order: 2;
+		  margin: 5px;
+		}
+		
+		.blue {
+		  margin: 5px;
+		}
+		
+		.purple {
+		  flex-basis: auto;
+		  width: 100%;
+		  min-height: 120px;
+		  margin: 5px;
+		}
+	  }
+	  
+	  /* Smartphone/Small */
+	  @media (max-width: 600px) {
+	  
+	    .content {
+          display: flex;
+          flex-direction: column;
+		  padding: 0px;
+	    }
+		.red {
+		  margin: 0px;
+		  min-height: 20vh;
+		}
+		.blue {
+          flex: 2;
+          min-height: 120vh;
+		  margin: 0px;
+		
+		}
+		.green {
+		  margin: 0px;
+		  min-height: 20vh;
+		}
+		.purple {
+		  margin: 0px;
+		}
+	  }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <div class="red"></div>
+      <div class="green"></div>
+      <div class="blue"></div>
+      <div class="purple"></div>
+    </div>
+  </body>
+</html>
