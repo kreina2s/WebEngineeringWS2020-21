@@ -3,7 +3,6 @@ body {
 	font-family: Calibri;
 	background: url(../img/background_image.png);
 }
-
 .container {
 	display: grid;
 	grid-auto-columns: 1fr;
