@@ -1,0 +1,343 @@
+<!--kreina2s-->
+<!DOCTYPE HTML>
+<html lang="de">
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="../css/flex.css">
+	<script src="../js/6_1.js"></script>
+	<script src="../js/6_2.js"></script>
+    <title>Web Engineering (kreina2s)</title>
+	<style>
+	button {
+		margin-bottom: 10px;
+	}
+	table, th, td {
+		border: 1px solid black;
+	}
+	.labelHours { 
+		display:inline-block; 
+		margin-left: 5px;
+	}
+	#neuerRedner {
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	#topologyInput {
+		border: 1px solid black; 
+		padding: 5px;
+	}
+	</style>
+  </head>
+  <body>
+    <div class="container">
+	  <div class="header">
+	    <a href="../index.html">
+		  <h1>Web Engineering</h1>
+		  <h2>von kreina2s</h2>
+		</a>
+	  </div>
+	  <div class="navigation">
+	    <a href="u1.html">Übung 1</a>
+	    <a href="u2.html">Übung 2</a>
+	    <a href="u3.html">Übung 3</a>
+	    <a href="u4.html">Übung 4</a>
+	    <a href="u5.html">Übung 5</a>
+	    <a href="u6.html">Übung 6</a>
+	  </div>
+	  <div class="content">
+		<h1>ECMA Script</h1>
+	    <h2>6.1 Klammerpaare</h2>
+		<h3>Schreiben Sie eine Webseite, in die man eine Zeichenkette 
+		mit beliebigen Buchstaben, Zahlen und Sonderzeichen eingeben kann, 
+		die beliebig geschachtelte Klammern [...], (...) und {...} enthält,
+		so dass sofort geprüft wird, ob alle Klammerpaare korrekt 
+		geschachtelt sind. Das Eingabefeld der Zeichenkette soll rot 
+		gefärbt werden, wenn es ein Klammerpaar gibt, das falsch 
+		geschachtelt ist.</h3>
+		<h3>Bonus: Verallgemeinern Sie Ihren Algorithmus, so dass man Klammerpaare 
+		als Parameter frei definieren kann. Es müssen also nicht [...], (...) 
+		und {...} sein, sondern es können auch andere Zeichen gewählt werden.</h3>
+		
+		<p>Definieren Sie zunächst Ihre Zeichen. Beispiel: {},[]. Achten Sie darauf,
+		dass die Zeichenpaare mit Kommata getrennt werden und keine gleichen Zeichen
+		auftauchen.<p>
+		<p id="bracketDefinition" contenteditable="true" oninput="updateMap(this.innerHTML)"></p>
+		<p>Geben Sie in das untere Feld eine beliebige Anzahl an Klammerpaaren ein.
+		Sollten die Klammerpaare nicht balanciert sein, färbt sich das Feld rot.</p>
+		<p id="bracketInput" contenteditable="true" oninput="brackets(this.innerHTML)"></p>
+		
+	    <h2>6.2 Topologische Iterierbarkeit</h2>
+		<h3>Schreiben Sie eine ES6-Klasse Vorrang für Vorrangrelationen, 
+		z.B. new Vorrang([ ["schlafen", "studieren"], ["essen", "studieren"], 
+		["studieren", "prüfen"] ]). Wählen Sie eine Implementierung, die 
+		universell gültig, also nicht nur für dieses Beispiel gilt. 
+		Betten Sie Ihren ECMAScript-Code in eine Webseite ein, so dass man die 
+		Vorrangrelation dort eingeben kann.</h3>
+		
+		<p>Dies ist eine Applikation, die dazu dient, Vorrangrelationen mittels Topology Sort Algorithmus zu sortieren. Bitte geben Sie
+		Vorrangrelationen im Format "A,B;A,C;B,D" in den Paragraphen unten ein. Ein Beispiel für richtige Formatierung ist bereits 
+		im Paragraphen enthalten. Achten Sie darauf, die Relationspaare mit Semikolons voneinander zu trennen.</p>
+		<p id="topologyInput" contenteditable="true">schlafen,studieren;essen,studieren;studieren,prüfen</p>
+		<button id="sortButton" onclick="startProcess()">Sortieren!</button>
+		<h3>Die sortierte Topologie erscheint hier:</h3>
+		<ul id="topologyList"></ul>
+		
+		<h2>6.3 Topologischer Generator</h2>
+		<h3>Stellen Sie bei Ihrer Klasse aus der letzten Aufgabe die topologische Iterierbarkeit 
+		mittels Generator her. Wählen Sie eine Implementierung, die universell 
+		gültig, also nicht nur für das Beispiel gilt.</h3>
+		
+<details>
+	<summary>Code zum ausklappen</summary>
+<pre>
+class Vorrang {
+  constructor(data) {
+    this._data = this.topSort(data);
+  }
+  
+  * [Symbol.iterator]() {
+    var data = this._data;
+    for(let elem of data) {
+      yield elem;
+    }
+  }
+
+  topSort(data, result=[], count=0) {
+    for(let i=0; data.length>i; i++) {
+      for(let j=0; data[i].length>j; j++) {
+        if(this.getPrecursors(data, data[i][j]) === 0 && !result.includes(data[i][j])) {
+          result.push(data[i][j]);
+        }
+      }
+    }
+    if(count-1 === data.length) {
+      var res = result;
+      return res;
+    }
+    data = (this.deleteVal(data, result[count-1])).slice();
+    return this.topSort(data, result, ++count);
+  }
+  
+  getPrecursors(data, val) {
+    var count = 0;
+    
+    for(let i=0; data.length>i; i++) {
+      if(data[i][1] === val) {
+        count++;
+      }
+    }
+    return count;
+  }
+  
+  deleteVal(data, val) {
+    var result = [];
+     
+    for(let i=0; data.length>i; i++) {
+      var arr = [];
+      for(let j=0; data[i].length>j; j++) {
+        if(data[i][j] !== val) {
+          arr.push(data[i][j]);
+        }
+      }
+      result.push(arr);
+    }
+    return result;
+  }
+  
+
+} 
+
+var topology1 = new Vorrang([["schlafen", "studieren"], ["essen", "studieren"], ["studieren", "prüfen"]]);
+var topology2 = new Vorrang([["kochen", "essen"], ["hacken", "kochen"], ["kochen", "abwaschen"], ["einkaufen", "hacken"]]);
+var topology3 = new Vorrang([[5, 6], [1,4], [2,3], [4,5], [1,5], [2,5], [2,4], [2,6], [3,5], [3,4]]);
+
+var solution1 = ["schlafen", "essen", "studieren", "prüfen"];
+var solution2 = ["einkaufen", "hacken", "kochen", "essen", "abwaschen"];
+var solution3 = [1, 2, 3, 4, 5, 6];
+
+var count1 = 0;
+var count2 = 0;
+var count3 = 0;
+
+for(let elem of topology1)
+{
+  console.log(elem);
+  console.assert(elem === solution1[count1++], {actual: elem, expected: solution1[count1]});
+}
+
+for(let elem of topology2)
+{
+  console.log(elem);
+  console.assert(elem === solution2[count2++], {actual: elem, expected: solution2[count2]});
+}
+
+for(let elem of topology3)
+{
+  console.log(elem);
+  console.assert(elem === solution3[count3++], {actual: elem, expected: solution3[count3]});
+}
+</pre>
+</details>
+
+		<h2>6.4 Proxy</h2>
+		<h3>Erweitern Sie Ihre Vorrang-Klasse um Logging, indem Sie ein Proxy einfügen. 
+		Lassen Sie sich vom Logger bei jedem Schritt ausgeben, wie viele der 
+		Vorrangrelationen noch übrig bleiben. Verwenden Sie so weit wie möglich 
+		High-Level-Methoden wie Object.keys und High-Level-Datenstrukturen wie Map und 
+		Set und deren Methoden, anstatt mühsam von Hand zu iterieren und zu zählen.</h3>
+		
+<details>
+	<summary>Code zum ausklappen</summary>
+<pre>
+const handler = {
+    get: function(target, property) {
+      console.log("Es verbleiben "+ target[property] + " Relationen.");
+      return target[property];
+    }
+}
+
+class Vorrang {
+  constructor(data) {
+    this._logger = new Proxy(this, handler);
+    this._size   = data.length; // Anzahl der Relationen
+    this._data   = this.topSort(data, this._logger, [], 0);
+  }
+  
+  * [Symbol.iterator]() {
+    var data = this._data;
+    
+    for(let elem of data) {
+      yield elem;
+    }
+  }
+  
+  topSort(data, logger, result=[], count=0) {
+    for(let i=0; data.length>i; i++) {
+      for(let j=0; data[i].length>j; j++) {
+        if(this.getPrecursors(data, data[i][j]) === 0 && !result.includes(data[i][j])) {
+          result.push(data[i][j]);
+        }
+      }
+    }
+    if(count-1 === data.length) {
+      var res = result;
+      return res;
+    }
+    data = (this.deleteVal(data, result[count-1])).slice();
+    console.log(logger._size--);
+    return this.topSort(data, logger, result, ++count);
+  }
+  
+  getPrecursors(data, val) {
+    var count = 0;
+    
+    for(let i=0; data.length>i; i++) {
+      if(data[i][1] === val) {
+        count++;
+      }
+    }
+    return count;
+  }
+  
+  deleteVal(data, val) {
+    var result = [];
+     
+    for(let i=0; data.length>i; i++) {
+      var arr = [];
+      for(let j=0; data[i].length>j; j++) {
+        if(data[i][j] !== val) {
+          arr.push(data[i][j]);
+        }
+      }
+      result.push(arr);
+    }
+    return result;
+  }
+} 
+
+var topology1 = new Vorrang([["schlafen", "studieren"], ["essen", "studieren"], ["studieren", "prüfen"]]);
+var topology2 = new Vorrang([["kochen", "essen"], ["hacken", "kochen"], ["kochen", "abwaschen"], ["einkaufen", "hacken"]]);
+var topology3 = new Vorrang([[5, 6], [1,4], [2,3], [4,5], [1,5], [2,5], [2,4], [2,6], [3,5], [3,4]]);
+
+
+var solution1 = ["schlafen", "essen", "studieren", "prüfen"];
+var solution2 = ["einkaufen", "hacken", "kochen", "essen", "abwaschen"];
+var solution3 = [1, 2, 3, 4, 5, 6];
+
+var count1 = 0;
+var count2 = 0;
+var count3 = 0;
+
+for(let elem of topology1)
+{
+  console.log(elem);
+  console.assert(elem === solution1[count1++], {actual: elem, expected: solution1[count1]});
+}
+
+for(let elem of topology2)
+{
+  console.log(elem);
+  console.assert(elem === solution2[count2++], {actual: elem, expected: solution2[count2]});
+}
+
+for(let elem of topology3)
+{
+  console.log(elem);
+  console.assert(elem === solution3[count3++], {actual: elem, expected: solution3[count3]});
+}
+</pre>	
+</details>
+
+		<h2>6.5 Deep Copy</h2>
+		<h3>Schreiben Sie eine rekursive Funktion deepCopy( struct ) als ES6-Ausdruck, so dass 
+		beliebig geschachtelte Arrays und Objekte struct tiefenkopiert werden können. Verwenden 
+		Sie zu diesem Zweck den konditionalen ternären Operator, Array.map(), Object.fromEntries() 
+		und Object.entries(). Verwenden Sie dabei nur Arrow Functions und Ausdrücke, keine Anweisungen,
+		keine Blöcke. Verwenden Sie nicht die JSON-Methoden.</h3>
+		
+<details>
+	<summary>Code zum ausklappen</summary>
+<pre>
+const deepCopy = (struct) => {
+  let result, key, value;
+
+  // Wert wird zurückgegeben, sollte struct kein Object sein
+  if (typeof struct !== "object" || struct === null) {
+    return struct;
+  }
+
+  // Erzeugung eines Arrays/Objects, um die Werte zu halten
+  result = Array.isArray(struct) ? [] : {};
+
+  // Rekursiver Aufruf für Verschachtelung
+  for (key in struct) {
+    value = struct[key];
+    result[key] = deepCopy(value);
+  }
+  return result;
+}
+
+var a = [['H'],['A'],['L'],['L'],['O']];
+var b = [[[['Was'],['zum'],['Henker']]]];
+var copy = deepCopy(a);
+console.log(copy);
+console.assert(copy[0][0] === a[0][0], {actual: false, expected: true});
+console.assert(copy[1][0] === a[1][0], {actual: false, expected: true});
+console.assert(copy[2][0] === a[2][0], {actual: false, expected: true});
+console.assert(copy[3][0] === a[3][0], {actual: false, expected: true});
+console.assert(copy[4][0] === a[4][0], {actual: false, expected: true});
+
+copy = deepCopy(b);
+console.assert(copy[0][0][0][0] === b[0][0][0][0], {actual: false, expected: true});
+console.assert(copy[0][0][1][0] === b[0][0][1][0], {actual: false, expected: true});
+console.assert(copy[0][0][2][0] === b[0][0][2][0], {actual: false, expected: true});
+</pre>	
+	
+	  </div>
+	  <div class="divider left-divider"></div>
+	  <div class="divider mid-divider"></div>
+	  <div class="divider right-divider"></div>
+	  <div class="divider bottom-divider"></div>
+	</div>
+  </body>
+</html>

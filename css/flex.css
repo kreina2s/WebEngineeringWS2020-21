@@ -135,3 +135,12 @@ body {
 	min-height: 0.2vh;
 }
 }
+
+#bracketDefinition {
+	border: 1px solid black;
+	margin-top: -15px;
+}
+
+#bracketInput {
+	border: 1px solid black;	
+}
