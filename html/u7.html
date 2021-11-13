@@ -4,9 +4,7 @@
   <head>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="../css/flex.css">
-	<script src="../js/5_1.js"></script>
-	<script src="../js/5_2.js"></script>
-	<script src="../js/5_3.js"></script>
+	<script src="../js/7_2.js"></script>
     <title>Web Engineering (kreina2s)</title>
 	<style>
 	button {
@@ -260,6 +258,22 @@ const vector = () => {
 	}
 }
 </pre>		
+
+		<h2>7.2 Textanalyse mit filter-map-reduce</h2>
+		<h3>Schreiben Sie in JavaScript eine Textanalyse. Ermitteln Sie die 
+		häufigsten Begriffe im Text <a href="https://kaul.inf.h-brs.de/we/assets/html/plagiatsresolution.html">Plagiatsresolution</a>. 
+		Filtern Sie dabei alle Stoppworte und HTML-Tags. Reduzieren Sie das Ergebnis auf die 3 häufigsten 
+		Begriffe.</h3>
+		<button type="button" onclick="startAnalysis()">Starte Textanalyse</button>
+		<p id="output" style="border: 1px solid black; padding: 5px;">Die Ausgabe der Textanalyse landet hier.</p>
+		
+		<h3>Schreiben Sie hier ihren eigenen Text hinein. Danach werden die häufigsten nicht-Stoppwörter in Ihrem
+		Text ermittelt.</h3>
+		<p id="textInput" style="border: 1px solid black; padding: 5px;" contenteditable="true">Schreiben Sie Ihren Text hier hinein.</p>
+		<button type="button" onclick="startAnalysisCustom()">Starte Textanalyse</button>
+		<p id="output2" style="border: 1px solid black; padding: 5px;">Die Ausgabe der Textanalyse landet hier.</p>
+
+
 	  </div>
 	  <div class="divider left-divider"></div>
 	  <div class="divider mid-divider"></div>
