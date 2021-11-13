@@ -1,0 +1,270 @@
+<!--kreina2s-->
+<!DOCTYPE HTML>
+<html lang="de">
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="../css/flex.css">
+	<script src="../js/5_1.js"></script>
+	<script src="../js/5_2.js"></script>
+	<script src="../js/5_3.js"></script>
+    <title>Web Engineering (kreina2s)</title>
+	<style>
+	button {
+		margin-bottom: 10px;
+	}
+	table, th, td {
+		border: 1px solid black;
+	}
+	.labelHours { 
+		display:inline-block; 
+		margin-left: 5px;
+	}
+	#neuerRedner {
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	#topologyInput {
+		border: 1px solid black; 
+		padding: 5px;
+	}
+	</style>
+  </head>
+  <body>
+    <div class="container">
+	  <div class="header">
+	    <a href="../index.html">
+		  <h1>Web Engineering</h1>
+		  <h2>von kreina2s</h2>
+		</a>
+	  </div>
+	  <div class="navigation">
+	    <a href="u1.html">Übung 1</a>
+	    <a href="u2.html">Übung 2</a>
+	    <a href="u3.html">Übung 3</a>
+	    <a href="u4.html">Übung 4</a>
+	    <a href="u5.html">Übung 5</a>
+	    <a href="u6.html">Übung 6</a>
+	    <a href="u7.html">Übung 7</a>
+	  </div>
+	  <div class="content">
+		<h1>Functional</h1>
+	    <h2>7.1 Funktionen in JavaScript</h2>
+		<h3>Schreiben Sie eine Funktion identity_function(), die ein Argument 
+		als Parameter entgegennimmt und eine Funktion zurückgibt, die dieses 
+		Argument zurückgibt.</h3>
+
+<pre>
+const identity_function = (x) => { 
+     return f = () => { 
+         return x; 
+     } 
+} 
+</pre>
+
+		<h3>Schreiben Sie eine Addier-Funktion addf(), so dass addf(x)(y) 
+		genau x + y zurück gibt. (Es haben also zwei Funktionsaufrufe zu 
+		erfolgen. addf(x) liefert eine Funktion, die auf y angewandt wird.)</h3>
+
+<pre>
+const addf = (x) => {
+	return add = (y) => {
+		return x+y;
+	}
+}
+</pre>
+
+		<h3>Schreiben Sie eine Funktion applyf(), die aus einer binären 
+		Funktion wie add(x,y) eine Funktion addfberechnet, die mit zwei 
+		Aufrufen das gleiche Ergebnis liefert, z.B. addf = applyf(add); 
+		addf(x)(y) soll add(x,y) liefern. Entsprechend applyf(mul)(5)(6) 
+		soll 30 liefern, wenn mul die binäre Multiplikation ist.</h3>
+
+<pre>
+const applyf = (binary) => {
+	return (x) => {
+		return (y) => {
+			return binary(x, y);
+	    }
+    }
+}
+</pre>
+
+		<h3>Schreiben Sie eine Funktion curry() (von Currying), die 
+		eine binäre Funktion und ein Argument nimmt, um daraus eine 
+		Funktion zu erzeugen, die ein zweites Argument entgegen nimmt, 
+		z.B. add3 = curry(add, 3);add3(4) ergibt 7. curry(mul, 5)(6) 
+		ergibt 30.</h3>
+
+<pre>
+const curry = (f, x) => {
+	return (y) => {
+		return f(x, y);
+	}
+}
+</pre>
+
+		<h3>Erzeugen Sie die inc-Funktion mit Hilfe einer der Funktionen 
+		addf, applyf und curry aus den letzten Aufgaben, ohne die Funktion 
+		inc() selbst zu implementieren.</h3>
+
+<pre>
+var inc1 = curry((x,y) => {return x+y}, 1);
+var inc2 = addf(1);
+var inc3 = applyf((x,y) => {return x+y})(1);
+</pre>
+
+		<h3>Schreiben Sie eine Funktion methodize(), die eine binäre 
+		Funktion (z.B. add, mul) in eine unäre Methode verwandelt. Nach 
+		Number.prototype.add = methodize(add); soll (3).add(4) genau 7 
+		ergeben.</h3>
+
+<pre>
+const methodize = (f) => {
+	return function(x) {
+		return f(this, x);
+	}
+}
+Number.prototype.add = methodize((x,y) => x+y);
+</pre>
+
+		<h3>Schreiben Sie eine Funktion demethodize(), die eine unäre Methode (z.B. add, mul) in eine binäre Funktion umwandelt. 
+		demethodize(Number.prototype.add)(5, 6) soll 11 ergeben.</h3>
+
+<pre>
+const demethodize = (f) => {
+	return (x,y) => {
+		return f.apply(x, [y]);
+	}
+}
+console.log(demethodize(Number.prototype.add)(5,6));
+</pre>
+
+		<h3>Schreiben Sie eine Funktion twice(), die eine binäre Funktion 
+		in eine unäre Funktion umwandelt, die den einen Parameter zweimal 
+		weiter reicht. Z.B. var double = twice(add); double(11) soll 22 
+		ergeben; var square = twice(mul); square(11) soll mul(11,11) === 
+		121 ergeben.</h3>
+
+<pre>
+const twice = (f) => {
+	return (x) => {
+		return f(x, x);
+	}
+}
+</pre>
+
+		<h3>Schreiben Sie eine Funktion composeu(), die zwei unäre 
+		Funktionen in eine einzelne unäre Funktion transformiert, die 
+		beide nacheinander aufruft, z.B. soll composeu(double, square)(3) 
+		genau 36 ergeben.</h3>
+
+<pre>
+const composeu = (f1, f2) => {
+	return (x) => {
+		return f2(f1(x));
+	}
+}
+</pre>
+
+		<h3>Schreiben Sie eine Funktion composeb(), die zwei binäre Funktionen in eine einzelne Funktion 
+		transformiert, die beide nacheinander aufruft, 
+		z.B. composeb(add, mul)(2, 3, 5) soll 25 ergeben.</h3>
+
+<pre>
+const composeb = (f1, f2) => {
+	return (x,y,z) => {
+		return f2(f1(x,y),z);
+	}
+}
+</pre>
+
+		<h3>Schreiben Sie eine Funktion once(), die einer anderen Funktion 
+		nur einmal erlaubt, aufgerufen zu werden, z.B. add_once = once(add); 
+		add_once(3, 4) soll beim ersten Mal 7 ergeben, beim zweiten Mal soll 
+		jedoch add_once(3, 4) einen Fehlerabbruch bewirken.</h3>
+
+<pre>
+const once = (f) => {
+	var done = false;
+	return (x,y) => {
+		if(done === true) {
+			throw "This function can only be used once.";
+		}
+		else {
+			done = true;
+			return f(x,y);
+		}
+	}
+}
+</pre>
+
+		<h3>Schreiben Sie eine Fabrik-Funktion counterf(), die zwei Funktionen inc() 
+		und dec() berechnet, die einen Zähler hoch- und herunterzählen. Z.B. 
+		counter = counterf(10); Dann soll counter.inc() 11 und counter.dec() 
+		wieder 10 ergeben.</h3>
+
+<pre>
+const counterf = (counter) => {
+	return {
+		inc: function() {
+			return ++counter;
+		},
+		dec: function() {
+			return --counter;
+		}
+	}
+}
+</pre>
+
+		<h3>Schreiben Sie eine rücknehmbare Funktion revocable(), die als 
+		Parameter eine Funktion nimmt und diese bei Aufruf ausführt. Sobald 
+		die Funktion aber mit revoke() zurück genommen wurde, führt ein 
+		erneuter Aufruf zu einem Fehler.</h3>
+
+<pre>
+const revocable = (f) => {
+	var execute = true;
+	return {
+		invoke: function(x) {
+			if(execute) {
+				return f(x);
+			}
+			else {
+				throw "You can't execute this function.";
+			}
+		},
+		revoke: function() {
+			execute = false;
+		}
+	}
+}
+</pre>
+
+		<h3>Implementieren Sie ein "Array Wrapper"-Objekt mit den Methoden 
+		get, store und append, so dass ein Angreifer keinen Zugriff auf 
+		das innere, private Array hat.</h3>
+
+<pre>
+const vector = () => {
+	var arr = [];
+	return {
+		append: function(x) {
+			arr.push(x);
+		},
+		store: function(i, x) {
+			arr[i] = x;
+		},
+		get: function(i) {
+			return arr[i];
+		}
+	}
+}
+</pre>		
+	  </div>
+	  <div class="divider left-divider"></div>
+	  <div class="divider mid-divider"></div>
+	  <div class="divider right-divider"></div>
+	  <div class="divider bottom-divider"></div>
+	</div>
+  </body>
+</html>
