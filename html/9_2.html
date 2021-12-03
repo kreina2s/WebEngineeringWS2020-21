@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+  <style>
+    .bar {
+	  fill: #d4730d;
+	}
+	
+	.bar:hover {
+	  fill: #ebb781;
+	}
+	
+	.axis {
+	  font: 14px sans-serif;
+	}
+	
+	.axis path,
+	.axis line {
+	  fill: none;
+	  stroke: #000000;
+	  shape-rendering: crispEdges;
+	}
+  </style>
+</head>
+<body>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script>
+  // Dimensions of the graphic
+  var margin = {top: 20, 
+				right: 20, 
+				bottom: 200, 
+				left: 80};
+  var width  = 700 - margin.left - margin.right;
+  var height = 650 - margin.top  - margin.bottom;
+  
+  // Ranges
+  var x = d3.scale.ordinal().rangeRoundBands([0, width], .02);
+  var y = d3.scale.linear().range([height, 0]);
+  
+  // Axes
+  var xAxis = d3.svg.axis().scale(x).orient("bottom");
+  var yAxis = d3.svg.axis().scale(y).orient("left").ticks(10);
+  
+  // Create SVG Element, append
+  var svg = d3.select("body").append("svg")
+    .attr("width",  width  + margin.left + margin.right)
+	.attr("height", height + margin.top  + margin.bottom)
+	.append("g")
+	.attr("transform", 
+		  "translate(" + margin.left + "," + margin.top + ")");
+
+  // Fetch Json-Data
+  d3.json("../json/fallzahlen.json", function(error, data) {
+
+    data.forEach(function(d) {
+        d.Land   = d.Land;
+        d.Anzahl = d.Anzahl;
+    });
+	
+  // Map data to x and y axes
+  x.domain(data.map(function(d) { return d.Land; }));
+  y.domain([0, d3.max(data, function(d) { return d.Anzahl; })]);
+
+  // add axis
+  svg.append("g").attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-.9em")
+      .attr("dy", "-.55em")
+      .attr("transform", "rotate(-90)" );
+
+  svg.append("g").attr("class", "y axis")
+      .call(yAxis)
+      .append("text")
+      .attr("transform", "rotate(0)")
+	  .attr("x", 220).attr("y", -20)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("COVID-19 Fallzahlen in Deutschland");
+	  
+  // add chart
+  svg.selectAll("bar").data(data).enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.Land); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.Anzahl); })
+      .attr("height", function(d) { return height - y(d.Anzahl); });
+  });
+</script>
+
+</body>

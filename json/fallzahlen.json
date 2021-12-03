@@ -1,0 +1,66 @@
+[
+{
+	"Land": "Baden-Württemberg",
+	"Anzahl": 824611
+},
+{
+	"Land" : "Bayern",
+	"Anzahl": 1126304
+},
+{
+	"Land" : "Berlin",
+	"Anzahl": 274431
+},
+{
+	"Land" : "Brandenburg",
+	"Anzahl": 176996
+},
+{
+	"Land" : "Bremen",
+	"Anzahl" : 39593
+},
+{
+	"Land" : "Hamburg",
+	"Anzahl" : 113872
+},
+{
+	"Land" : "Hessen",
+	"Anzahl" : 412643
+},
+{
+	"Land" : "Mecklenburg-Vorpommern",
+	"Anzahl" : 70581
+},
+{
+	"Land" : "Niedersachsen",
+	"Anzahl" : 375168
+},
+{
+	"Land" : "Nordrhein-Westfalen",
+	"Anzahl" : 1172573
+},
+{
+	"Land" : "Rheinland-Pfalz",
+	"Anzahl" : 232349
+},
+{
+	"Land" : "Saarland",
+	"Anzahl" : 60958
+},
+{
+	"Land" : "Sachsen",
+	"Anzahl" : 493481
+},
+{
+	"Land" : "Sachsen-Anhalt",
+	"Anzahl" : 155734
+},
+{
+	"Land" : "Schleswig-Holstein",
+	"Anzahl" : 96375
+},
+{
+	"Land" : "Thüringen",
+	"Anzahl" : 211144
+}
+]

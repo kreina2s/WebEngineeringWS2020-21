@@ -1,0 +1,364 @@
+<!--kreina2s-->
+<!DOCTYPE HTML>
+<html lang="de">
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="../css/flex.css">
+	<script src="../js/7_2.js"></script>
+    <title>Web Engineering (kreina2s)</title>
+	<style>
+    body { 
+	  font-family: Calibri; 
+	}
+	svg, rect{
+      height: 650px;
+      width: 600px;
+      -webkit-transition: all 1s ease;
+      -moz-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+      transition: all 1s ease;
+    }
+    svg:hover, rect:hover {
+      width: 1300px;
+      height: 1200px;
+	  font-size: 220px
+    }
+	
+    #gamefield
+	{
+	  border-collapse: collapse;
+	}
+	
+	#gamefield td
+	{
+	  width: 4em;
+	  height: 4em;
+	  border: 1px solid;
+	}
+
+	#gamefield svg
+	{
+	  display: block;
+	  width: 100%;
+	  height: 100%;
+	  stroke: currentColor;
+	  stroke-width: 0.1;
+	}
+
+	#gamefield .X svg
+	{
+	  stroke: orange;
+	}
+
+	#gamefield .O svg
+	{
+	  stroke: green;
+	}
+	
+	#info 
+	{
+	  font-family: Calibri;
+	  font-size: 22px;
+	  font-weight: bold;
+	  margin-left: 5px;
+	}
+	</style>
+  </head>
+  <body>
+    <div class="container">
+	  <div class="header">
+	    <a href="../index.html">
+		  <h1>Web Engineering</h1>
+		  <h2>von kreina2s</h2>
+		</a>
+	  </div>
+	  <div class="navigation">
+	    <a href="u1.html">Übung 1</a>
+	    <a href="u2.html">Übung 2</a>
+	    <a href="u3.html">Übung 3</a>
+	    <a href="u4.html">Übung 4</a>
+	    <a href="u5.html">Übung 5</a>
+	    <a href="u6.html">Übung 6</a>
+	    <a href="u7.html">Übung 7</a>
+	    <a href="u8.html">Übung 8</a>
+	    <a href="u9.html">Übung 9</a>
+	  </div>
+	  <div class="content">
+		<h1>SVG</h1>
+	    <h2>9.1 SVG Grafik von Hand erstellen</h2>
+		<h3>Codieren Sie eine HTML-Datei mit Inline SVG, so dass sich folgendes Aussehen ergibt:</h3>
+		<svg>
+			<rect height="500" width="600" x="100" y="100" style="fill:rgb(203, 121, 141)"></rect>
+			<text x="150" y="220" style="fill:white; font-size: 110px;">Use
+			  <tspan x="150" y="370">The</tspan>
+			  <tspan x="150" y="520">Platform</tspan>
+			</text>
+			<line x1="150" y1="240" x2="550" y2="240" style="fill:white; stroke: white; stroke-width:5"/>
+			<line x1="150" y1="390" x2="550" y2="390" style="fill:white; stroke: white; stroke-width:5"/>
+			<line x1="150" y1="540" x2="550" y2="540" style="fill:white; stroke: white; stroke-width:5"/>
+		</svg>
+		
+		<h2>9.2 Statistik-Balkendiagramm in SVG</h2>
+		<h3>Implementieren Sie ein eigenes Balkendiagramm mit HTML, 
+		Inline SVG, CSS und JavaScript. Geben Sie die Daten für das 
+		Balkendiagramm im JSON-Format vor. Nehmen Sie als Beispieldaten 
+		die COVID-19: Fallzahlen in Deutschland. Animieren Sie die 
+		Grafik.</h3>
+		<a href="9_2.html">Klicken Sie hier, um das Balkendiagramm zu betrachten.</a>
+		
+		<h2>9.3 TicTacToe</h2>
+		<h3>Implementieren Sie Tic Tac Toe mit inline SVG.</h3>
+		
+		<svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+			<symbol id="circle" viewBox="0 0 1 1">
+				<title>circle</title>
+				<circle cx="0.5" cy="0.5" r="0.4" fill="none"/>
+			</symbol>
+			<symbol id="cross" viewBox="0 0 1 1">
+				<title>cross</title>
+				<line x1="0.1" y1="0.1" x2="0.9" y2="0.9"/>
+				<line x1="0.1" y1="0.9" x2="0.9" y2="0.1"/>
+			</symbol>
+		  </svg>
+
+		  <div id="content">
+			<table id="gamefield">
+			  <tbody>
+				<tr>
+				  <td id="A"></td>
+				  <td id="B"></td>
+				  <td id="C"></td>
+				</tr>
+				<tr>
+				  <td id="D"></td>
+				  <td id="E"></td>
+				  <td id="F"></td>
+				</tr>
+				<tr>
+				  <td id="G"></td>
+				  <td id="H"></td>
+				  <td id="I"></td>
+				</tr>
+			  </tbody>
+			</table>
+		  </div>
+		  <div id="info">
+			<p id="info-p">Spieler 1 ist am Zug. (X)</p>
+		  </div>
+	  
+	  <div class="divider left-divider"></div>
+	  <div class="divider mid-divider"></div>
+	  <div class="divider right-divider"></div>
+	  <div class="divider bottom-divider"></div>
+	</div>
+	
+	<script>
+	  var gamefield = document.querySelector('#gamefield');
+	  gamefield.addEventListener("click", ticTacToe);
+	  var move = true;
+	  var turnCount = 0;
+
+	  function ticTacToe(e)
+	  {
+		var target = e.target;
+		var p = document.getElementById("info-p");
+		if (target.nodeName === "TD" && 
+			!target.className)
+		{
+			if (move)
+			{
+				target.className = "X";
+				target.innerHTML = "<svg><use xlink:href='#cross'/></svg>";
+				target.id		 = target.id + "_setX";
+				p.innerText 	 = "Spieler 2 ist am Zug. (O)";
+			}
+			else
+			{
+				target.className = "O";
+				target.innerHTML = "<svg><use xlink:href='#circle'/></svg>";
+				target.id		 = target.id + "_setO";
+				p.innerText 	 = "Spieler 1 ist am Zug. (X)";
+			}
+			move = !move;
+		}
+		turnCount++;
+		// Only check after turn 4, as the first win condition can only be triggered
+		// from thereon out.
+		if(turnCount>4)
+		  checkWinner();
+	  }
+	  
+	  // We have to check every state where a win is possible for both entities.
+	  // 8 Possible combinations (3 horizontal rows, 3 vertical rows, 2 diagonals) 
+	  // times 2 (X, 0) = 16 conditions.
+	  function checkWinner() {
+		var winner = false;
+		var winningPlayer = "";
+		var p = document.getElementById("info-p");
+		
+		var aX = document.getElementById("A_setX");
+		var bX = document.getElementById("B_setX");
+		var cX = document.getElementById("C_setX");
+		var dX = document.getElementById("D_setX");
+		var eX = document.getElementById("E_setX");
+		var fX = document.getElementById("F_setX");
+		var gX = document.getElementById("G_setX");
+		var hX = document.getElementById("H_setX");
+		var iX = document.getElementById("I_setX");
+	  
+		// ABC - X wins
+		if(aX != null && bX != null && cX != null)
+		{
+		  alert("Spieler 1 gewinnt!");
+		  winner = true;
+		  winningPlayer = "X";
+		}
+		
+		// DEF - X wins
+		if(dX != null && eX != null && fX != null)
+		{
+		  alert("Spieler 1 gewinnt!");
+		  winner = true;
+		  winningPlayer = "X";
+		}
+		
+		// GHI - X wins 
+		if(gX != null && hX != null && iX != null)
+		{
+		  alert("Spieler 1 gewinnt!");
+		  winner = true;
+		  winningPlayer = "X";
+		}
+		
+		// ADG - X wins
+		if(aX != null && dX != null && gX != null)
+		{
+		  alert("Spieler 1 gewinnt!");
+		  winner = true;
+		  winningPlayer = "X";
+		}
+		
+		// BEH - X wins 
+		if(bX != null && eX != null && hX != null)
+		{
+		  alert("Spieler 1 gewinnt!");
+		  winner = true;
+		  winningPlayer = "X";
+		}
+		
+		// CFI - X wins 
+		if(cX != null && fX != null && iX != null)
+		{
+		  alert("Spieler 1 gewinnt!");
+		  winner = true;
+		  winningPlayer = "X";
+		}
+		
+		// AEI - X wins 
+		if(aX != null && eX != null && iX != null)
+		{
+		  alert("Spieler 1 gewinnt!");
+		  winner = true;
+		  winningPlayer = "X";
+		}
+		
+		// GEC - X wins 
+		if(gX != null && eX != null && cX != null)
+		{
+		  alert("Spieler 1 gewinnt!");
+		  winner = true;
+		  winningPlayer = "X";
+		}
+		
+		var aO = document.getElementById("A_setO");
+		var bO = document.getElementById("B_setO");
+		var cO = document.getElementById("C_setO");
+		var dO = document.getElementById("D_setO");
+		var eO = document.getElementById("E_setO");
+		var fO = document.getElementById("F_setO");
+		var gO = document.getElementById("G_setO");
+		var hO = document.getElementById("H_setO");
+		var iO = document.getElementById("I_setO");
+	  
+		// ABC - O wins
+		if(aO != null && bO != null && cO != null)
+		{
+		  alert("Spieler 2 gewinnt!");
+		  winner = true;
+		  winningPlayer = "O";
+		}
+		
+		// DEF - O wins
+		if(dO != null && eO != null && fO != null)
+		{
+		  alert("Spieler 2 gewinnt!");
+		  winner = true;
+		  winningPlayer = "O";
+		}
+		
+		// GHI - O wins 
+		if(gO != null && hO != null && iO != null)
+		{
+		  alert("Spieler 2 gewinnt!");
+		  winner = true;
+		  winningPlayer = "O";
+		}
+		
+		// ADG - O wins
+		if(aO != null && dO != null && gO != null)
+		{
+		  alert("Spieler 2 gewinnt!");
+		  winner = true;
+		  winningPlayer = "O";
+		}
+		
+		// BEH - O wins 
+		if(bO != null && eO != null && hO != null)
+		{
+		  alert("Spieler 2 gewinnt!");
+		  winner = true;
+		  winningPlayer = "O";
+		}
+		
+		// CFI - O wins 
+		if(cO != null && fO != null && iO != null)
+		{
+		  alert("Spieler 2 gewinnt!");
+		  winner = true;
+		  winningPlayer = "O";
+		}
+		
+		// AEI - O wins 
+		if(aO != null && eO != null && iO != null)
+		{
+		  alert("Spieler 2 gewinnt!");
+		  winner = true;
+		  winningPlayer = "O";
+		}
+		
+		// GEC - O wins 
+		if(gO != null && eO != null && cO != null)
+		{
+		  alert("Spieler 2 gewinnt!");
+		  winner = true;
+		  winningPlayer = "O";
+		}
+		
+		if(winner)
+		{
+		  gamefield.removeEventListener("click", ticTacToe);
+		  if(winningPlayer === "X")
+			p.innerText = "Spieler 1 gewinnt!";
+		  else
+			p.innerText = "Spieler 2 gewinnt!";
+		}
+		// No winner 
+		if(turnCount === 9 && !winner)
+		{
+		  p.innerText = "Unentschieden!";
+		  alert("Unentschieden!");
+		}
+	  }
+	</script>
+  </body>
+</html>
