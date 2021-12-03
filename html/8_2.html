@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang=en>
+<head>
+  <meta charset="UTF-8">
+  <title>Anzeige von Daten mittels Await/Async</title>
+</head>
+
+<body>
+  <div id="content"></div>
+  <script>
+	(async function() {
+	  let a, b;
+	  try {
+	    a = await fetch("../txt/A.txt", {credentials: "include"});
+		b = await fetch("../txt/B.txt", {credentials: "include"});
+		
+		a = await a.text();
+		b = await b.text();
+	  } catch(e) {
+	    console.error(e)
+	  }
+	  
+	  var content = document.getElementById("content");
+	  let len = Math.max(a.length, b.length);
+	  a = a.split("\n");
+	  b = b.split("\n");
+		
+	  for (let i=0; i<len; i++) {
+        let p = document.createElement("p");
+		let txt = "";
+		
+		if(i < a.length) txt += a[i];
+		if(i < b.length) txt += b[i];
+		
+		p.textContent = txt;
+		content.appendChild(p);
+	  }
+	
+	})();
+	
+  </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+{
+  "html": {
+    "headings": {
+      "content": "Die Überschriftenelemente bestehen aus sechs verschiedenen Leveln. <h1> ist die Überschrift mit der höchsten Gewichtung und <h6> mit der kleinsten. Ein Überschriften-Element beschreibt das Thema des Bereiches, welcher der Überschrift folgt. Überschriften können auch verwendet werden, um ein Inhaltsverzeichnis für ein Dokument automatisch zu erstellen.",
+      "references": [
+        "https://developer.mozilla.org/de/docs/Web/HTML/Element/h1-h6"
+      ]
+    },
+    "paragraph": {
+      "content": "Das <p>-Element erzeugt einen Absatz, den zusammenhängenden Abschnitt eines längeren Textes. In HTML kann <p> jedoch für jedwede Art von zu gruppierendem, zusammenhängendem Inhalt genutzt werden, zum Beispiel Bilder oder Formularfelder.",
+      "references": [
+        "https://developer.mozilla.org/de/docs/Web/HTML/Element/p"
+      ]
+    },
+    "block": {
+      "content": "Block- und Inline-Elemente sind die zwei ursprünglichen Kategorien der darstellenden HTML-Elemente. Block-Elemente nehmen typischerweise die gesamte verfügbare Breite ihres Elternelements ein und grenzen ihren Inhalt vertikal durch je einen Zeilenumbruch gegenüber den vor- und nachfolgenden Elementen ab. Auf diese Weise erzeugen sie den rechteckigen Block, der ihnen den Namen gibt.",
+      "references": [
+        "https://developer.mozilla.org/de/docs/Web/HTML/Block-level_elements"
+      ]
+    },
+    "div": {
+      "content": "Das HTML-Element <div> (Englisch: HTML Document Division Element) ist ein allgemeiner Container für fließenden Inhalt, dem keine semantische Bedeutung zugeordnet wird. Der wesentliche Unterschied zwischen <div> und anderen Block-Elementen wie beispielsweise <article> oder <p> ist die semantische Bedeutung bzw. das Fehlen dieser. Während <article> einen Artikel, einen eigenständigen Bereich eines Dokuments darstellt und <p> einen Textabsatz, gibt <div> seinem Inhalt keine Bedeutung. <div> sollte deshalb nur genutzt werden, falls kein anderes Block-Element eine zutreffendere Aussage macht. Der Einsatzbereich von <div> ist die Gruppierung von Elementen alleine zum Zweck der Gestaltung oder des programmatischen Zugriffs (mit Hilfe des class- oder id-Attributs), oder weil sie die gleichen Attribut-Werte besitzen, wie zum Beispiel das Attribut lang.",
+      "references": [
+        "https://developer.mozilla.org/de/docs/Web/HTML/Element/div"
+      ]
+    }
+  },
+  "css": {
+    "selectors": {
+      "content": "Selektoren definieren, auf welche Elemente eine Reihe von CSS Regeln angewendet wird.",
+      "references": [
+        "https://developer.mozilla.org/de/docs/Web/CSS/CSS_Selectors"
+      ]
+    },
+    "colors": {
+      "content": "Der CSS Datentyp Color beschreibt eine Farbe im sRGB Farbraum. Eine Farbe kann auf eine von drei Arten beschrieben werden: Schlüsselworte, rgb und rgba, hsl und hsla. ...",
+      "references": [
+        "https://developer.mozilla.org/de/docs/Web/CSS/Farben"
+      ]
+    },
+    "font-size": {
+      "content": "Die font-size-CSS-Eigenschaft spezifiziert die Schriftgöße. Eine Änderung der Schriftgröße kann die Größe anderer Partien beeinflussen, da sie dazu benutzt wird, den Wert der em- und ex-<length>-Einheiten zu berechnen.",
+      "references": [
+        "https://developer.mozilla.org/de/docs/Web/CSS/font-size"
+      ]
+    },
+    "decoration": {
+      "content": "Die text-decoration CSS Eigenschaft wird dazu verwendet, die Textformatierung auf underline, overline, line-through oder blink zu setzen. Unter- und Überstrichdekorationen werden unterhalb des Texts positioniert, Durchstreichungen über dem Text. Textdekorationen werden auf Unterelemente gezeichnet. Das bedeutet, dass es nicht möglich ist, die Textdekoration, die für ein übergeordnetes Element angegeben wurde, für ein Unterelement zu deaktivieren. Zum Beispiel würde in folgendem Markup <p>Dieser Text hat <em>ein paar hervorgehobene Wörter</em>.</p> die Stilregel p { text-decoration: underline; } den gesamten Absatz unterstreichen. Die Stilregel em { text-decoration: none; } würde nichts ändern; der gesamte Absatz wäre immer noch unterstrichen. Jedoch würde die Regel em { text-decoration: overline; } eine zweite Dekoration für 'ein paar hervorgehobene Wörter' erscheinen lassen.",
+      "references": [
+        "https://developer.mozilla.org/de/docs/Web/CSS/text-decoration"
+      ]
+    }
+  },
+  "javascript": {
+    "function": {
+      "content": "Funktionen sind ein Grundbaustein in JavaScript. Eine Funktion ist eine Prozedur - eine Reihe von Anweisungen, um eine Aufgabe auszuführen oder eine Wert auszurechnen. Um Funktionen zu verwenden, müssen diese im Scope (Gültigkeitsbereich) deklariert werden, in dem sie ausgeführt werden soll.",
+      "references": [
+        "https://developer.mozilla.org/de/docs/Web/JavaScript/Guide/Funktionen"
+      ]
+    },
+    "object": {
+      "content": "Ein Objekt ist eine Sammlung von zusammenhängenden Daten und/oder Funktionalitäten. Diese bestehen üblicherweise aus verschiedenen Variablen und Funktionen, die Eigenschaften und Methoden genannt werden, wenn sie sich innerhalb von Objekten befinden.",
+      "references": [
+        "https://developer.mozilla.org/de/docs/Learn/JavaScript/Objects/Basics"
+      ]
+    },
+    "split": {
+      "content": "Die split() Methode teilt ein String Objekt in ein Array von Strings auf, indem der String in Teilstrings zerteilt wird, wobei ein angegebenes Trennzeichen verwendet wird, um zu bestimmen, wo die Aufteilung erfolgen soll.",
+      "references": [
+        "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/String/split"
+      ]
+    },
+    "log": {
+      "content": "Gibt eine Nachricht auf der Web-Konsole aus.",
+      "references": [
+        "https://developer.mozilla.org/de/docs/Web/API/Console/log"
+      ]
+    }
+  },
+  "other": {
+    "PHP": {
+      "content": "PHP ist eine serverseitige Scriptsprache zur Entwicklung von webbasierten Anwendungen und dynamischen Webseiten.",
+      "references": [
+        "https://developer.mozilla.org/de/docs/Glossary/PHP"
+      ]
+    },
+    "jQuery": {
+      "content": "jQuery is a JavaScript Library that focuses on simplifying DOM manipulation, AJAX calls, and Event handling. jQuery uses a format, $(selector).action() to assign an element(s) to an event. To explain it in detail, $(selector) will call jQuery to select selector element(s), and assign it to an event API called .action().",
+      "references": [
+        "https://developer.mozilla.org/en-US/docs/Glossary/jQuery"
+      ]
+    },
+    "DOM": {
+      "content": "Das DOM (Document Object Model) ist eine API, die ein HTML oder XML Dokument darstellt und damit interagiert. Das DOM ist ein Modell, das im Browser geladen wird und stellt ein Dokument als einen Knotenbaum dar, in dem jeder Knoten einen Teil des Dokuments darstellt (z.B. ein Element, einen Text oder Kommentar). Das DOM ist eine der am häufigsten genutzten APIs im Web (en-US), weil sie dem Browser erlaubt, auf ein Dokument zuzugreifen und damit zu interagieren. Knoten können erstellt, bewegt, geändert oder gelöscht werden. Event Handler können erstellt werden, um auf bestimmte Ereignisse zu warten. In den frühen Jahren des Internets gab es noch keine Spezifikation des DOM. Als die Browser begannen, JavaScript zu implementieren, wurde das DOM erschaffen. Diese erste Variante des DOM wird meistens DOM 0 genannt. Heute pflegt das WHATWG den DOM Living Standard.",
+      "references": [
+        "https://developer.mozilla.org/de/docs/Glossary/DOM"
+      ]
+    }
+  }
+}

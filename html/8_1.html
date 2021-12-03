@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang=en>
+<head>
+  <meta charset="UTF-8">
+  <title>Anzeige von Daten mittels Promise</title>
+</head>
+
+<body>
+  <div id="content"></div>
+  <script>
+	// Nutze fetch API, um Dateien zu laden
+	let a = fetch("../txt/A.txt", {
+	  credentials: "include"
+	}).then(response => response.text());
+	
+	let b = fetch("../txt/B.txt", {
+	  credentials: "include"
+	}).then(response => response.text());
+	
+	// Nutze Promise, um Dateien zeilenweise in div 
+	// auszugeben
+	
+	Promise.all([a, b]).then(([first, second]) => {
+	  var content = document.getElementById("content");
+	  let len = Math.max(first.length, second.length);
+	  first = first.split("\n");
+	  second = second.split("\n");
+		
+	  for (let i=0; i<len; i++) {
+        let p = document.createElement("p");
+		let txt = "";
+		
+		if(i < first.length) txt += first[i];
+		if(i < second.length) txt += second[i];
+		
+		p.textContent = txt;
+		content.appendChild(p);
+	  }
+	});
+  </script>
+</body>
+</html>
