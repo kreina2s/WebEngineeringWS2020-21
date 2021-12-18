@@ -1,0 +1,627 @@
+<!--kreina2s-->
+<!DOCTYPE HTML>
+<html lang="de">
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="../css/flex.css">
+	<script src="../js/7_2.js"></script>
+    <title>Web Engineering (kreina2s)</title>
+  </head>
+  <body>
+    <div class="container">
+	  <div class="header">
+	    <a href="../index.html">
+		  <h1>Web Engineering</h1>
+		  <h2>von kreina2s</h2>
+		</a>
+	  </div>
+	  <div class="navigation">
+	    <a href="u1.html">Übung 1</a>
+	    <a href="u2.html">Übung 2</a>
+	    <a href="u3.html">Übung 3</a>
+	    <a href="u4.html">Übung 4</a>
+	    <a href="u5.html">Übung 5</a>
+	    <a href="u6.html">Übung 6</a>
+	    <a href="u7.html">Übung 7</a>
+	    <a href="u8.html">Übung 8</a>
+	    <a href="u9.html">Übung 9</a>
+	    <a href="u10.html">Übung 10</a>
+	    <a href="u11.html">Übung 11</a>
+	    <a href="#">Übung 12</a>
+	    <a href="#">Übung 13</a>
+	  </div>
+	  <div class="content">
+		<h1>Vue</h1>
+		<h2>11.1: Komponente in Vue.js</h2>
+		<h3>Schreiben Sie eine Vue.js Single File Component mit einem Text-Eingabefeld 
+		und 3 Ausgabefeldern, in denen man während des Tippens sehen kann, 
+		(a) wie viele Buchstaben (b) wie viele Leerzeichen und (c) wie viele 
+		Worte man in das Text-Eingabefeld bereits eingegeben hat.</h3>
+		<div id="app1"></div><br/>
+		<div id="app2"></div>
+	  
+		<h2>11.2: Menü-Komponente</h2>
+		<h3>Schreiben Sie eine möglichst flexible Vue.js Single File Component für 
+		Menüs und wenden Sie diese in derselben Webseite zweimal an, einmal horizontal, das andere Mal vertikal.</h3>
+
+<details>
+	<summary>Code zum ausklappen</summary>
+<pre>
+App.vue
+&lt;template&gt;
+  &lt;div id=&quot;app&quot;&gt;
+    &lt;Flex direction=&quot;row&quot;&gt;
+      &lt;p&gt;FlexMenu&lt;/p&gt;
+      &lt;p&gt;Content&lt;/p&gt;
+      &lt;p&gt;Kontakt&lt;/p&gt;
+      &lt;p&gt;Datenschutz&lt;/p&gt;
+      &lt;p&gt;Login&lt;/p&gt;
+    &lt;/Flex&gt;
+    &lt;Flex direction=&quot;column&quot;&gt;
+      &lt;p&gt;HTML&lt;/p&gt;
+      &lt;p&gt;CSS&lt;/p&gt;
+      &lt;p&gt;JavaScript&lt;/p&gt;
+      &lt;p&gt;Vue.js&lt;/p&gt;
+    &lt;/Flex&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import Flex from &quot;./Flex.vue&quot;;
+
+export default {
+  name: &quot;app&quot;,
+  components: {
+    Flex,
+  },
+};
+&lt;/script&gt;
+
+&lt;style&gt;
+#app {
+  font-family: Calibri;
+  text-align: center;
+  margin: 20px;
+}
+&lt;/style&gt;
+
+
+Flex.vue
+&lt;template&gt;
+  &lt;div class=&quot;menu&quot; v-bind:style=&quot;{ flexDirection: direction }&quot;&gt;
+    &lt;slot&gt;&lt;/slot&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &quot;Flex&quot;,
+  props: {
+    direction: String,
+  },
+};
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.menu &gt; * {
+  color: #000000;
+  margin: 1rem;
+}
+&lt;/style&gt;
+
+
+main.js
+import Vue from &quot;vue&quot;;
+import App from &quot;./App.vue&quot;;
+
+Vue.config.productionTip = false;
+
+new Vue({
+  render: (h) =&gt; h(App)
+}).$mount(&quot;#app&quot;);
+
+
+index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot; /&gt;
+    &lt;title&gt;Flexibles Men&uuml;&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</details>
+
+		<h2>11.3: Vue.js WWW-Navigator</h2>
+		<h3>Dokumentieren Sie Ihren Entscheidungsprozess: In welche 
+		Komponenten wollen Sie Ihre App zerlegen? Wie soll das State 
+		Management implementiert werden?</h3>
+		<p>Da wir das Grundgerüst des WWW-Navigators bereits gebaut und 
+		somit zur Verfügung haben, möchte ich die einzelnen Komponenten 
+		(header, sidenav, footer ...) in eigene .vue Files einspeisen. 
+		Somit bewahren wir die Übersicht und wir können alle Elemente 
+		später wieder ein der "App.vue" zusammenfügen.</p>
+		<p>Das State Management werden wir weiterhin durch Javascript 
+		verwirklichen. Wir ändern dafür nichts an unserem Code, sondern 
+		importieren ihn ebenfalls in unsere App.</p>
+		
+		<h3>Geben Sie die Inhalte aller Dateien (ohne node_modules) Ihrer Lösung inkl. 
+		JS-Quelltext hintereinander ein. Schreiben Sie vor jede Datei deren Dateiname:</h3>
+
+<details>
+	<summary>Code zum ausklappen</summary>
+<pre>
+./src/App.vue
+&lt;template&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;content&quot;&gt;
+      &lt;Nav&gt;&lt;/Nav&gt;
+      &lt;Main&gt;&lt;/Main&gt;
+      &lt;Side&gt;&lt;/Side&gt;
+    &lt;/div&gt;
+    &lt;Header&gt;&lt;/Header&gt;
+    &lt;Footer&gt;&lt;/Footer&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import Nav from &quot;./components/Nav.vue&quot;;
+import Main from &quot;./components/Main.vue&quot;;
+import Side from &quot;./components/Side.vue&quot;;
+import Header from &quot;./components/Header.vue&quot;;
+import Footer from &quot;./components/Footer.vue&quot;;
+
+export default {
+  name: &quot;App&quot;,
+  components: {
+    Nav,
+    Main,
+    Side,
+    Header,
+    Footer,
+  },
+};
+&lt;/script&gt;
+
+&lt;style&gt;
+body {
+  font-family: Calibri;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 4.1fr 0.6fr;
+  grid-auto-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  height: 98vh;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 0.5fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-area: 2 / 1 / 3 / 2;
+}
+&lt;/style&gt;
+
+
+./src/globals.js
+export var menu,
+  jsonContent = 0;
+
+load().then((val) =&gt; {
+  jsonContent = val;
+});
+
+async function load() {
+  var file = await fetch(&quot;topics.json&quot;);
+  var result = await file.json();
+  console.log(result);
+  return result;
+}
+
+export function initButtons(x) {
+  var navigation = document.getElementById(&quot;nav&quot;);
+  navigation.innerHTML = &quot;&quot;;
+  menu = jsonContent[x];
+  for (let key in menu) {
+    var button = document.createElement(&quot;button&quot;);
+    button.innerHTML = key;
+    button.onclick = () =&gt; initTopic(key);
+    navigation.appendChild(button);
+  }
+}
+
+export function initTopic(x) {
+  // Clean up main first
+  var main = document.getElementById(&quot;main&quot;);
+  main.innerHTML = &quot;&quot;;
+
+  // Append new text paragraphs
+  var p = document.createElement(&quot;p&quot;);
+  var ref = document.createElement(&quot;p&quot;);
+  var a = document.createElement(&quot;a&quot;);
+  a.innerHTML = menu[x].references;
+  a.href = menu[x].references;
+
+  ref.appendChild(document.createTextNode(&quot;Reference: &quot;));
+  p.appendChild(document.createTextNode(menu[x].content));
+  main.appendChild(p);
+  main.appendChild(ref);
+  main.appendChild(a);
+}
+
+
+./src/main.js
+import Vue from &quot;vue&quot;;
+import App from &quot;./App.vue&quot;;
+
+Vue.config.productionTip = false;
+
+new Vue({
+  render: (h) =&gt; h(App)
+}).$mount(&quot;#app&quot;);
+
+
+./src/components/Footer.vue
+&lt;template&gt;
+  &lt;div class=&quot;footer&quot;&gt;
+    Footer:
+    &lt;span&gt;
+      &lt;a class=&quot;footerLink&quot; href=&quot;#&quot;&gt;Sitemap &lt;/a&gt;
+      &lt;a class=&quot;footerLink&quot; href=&quot;#&quot;&gt;Home &lt;/a&gt;
+      &lt;a class=&quot;footerLink&quot; href=&quot;#&quot;&gt;News &lt;/a&gt;
+      &lt;a class=&quot;footerLink&quot; href=&quot;#&quot;&gt;Contact &lt;/a&gt;
+      &lt;a class=&quot;footerLink&quot; href=&quot;#&quot;&gt;About &lt;/a&gt;
+    &lt;/span&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &quot;Footer&quot;,
+};
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+.footer {
+  background-color: black;
+  font-size: 36px;
+  color: white;
+  grid-area: 3 / 1 / 4 / 2;
+  text-align: center;
+  padding: 30px;
+}
+
+.footerLink {
+  font-size: 24px;
+}
+
+.footerLink:link {
+  color: white;
+}
+
+.footerLink:visited {
+  color: white;
+}
+&lt;/style&gt;
+
+
+./src/components/Header.vue
+&lt;template&gt;
+  &lt;div class=&quot;header&quot;&gt;
+    &lt;div class=&quot;headline&quot;&gt;WWW-Navigator&lt;/div&gt;
+    &lt;div class=&quot;buttons&quot;&gt;
+      &lt;button id=&quot;htmlButton&quot; v-on:click=&quot;initButtons('html')&quot;&gt;HTML&lt;/button&gt;
+      &lt;button id=&quot;cssButton&quot; v-on:click=&quot;initButtons('css')&quot;&gt;CSS&lt;/button&gt;
+      &lt;button id=&quot;jsButton&quot; v-on:click=&quot;initButtons('javascript')&quot;&gt;
+        JavaScript
+      &lt;/button&gt;
+      &lt;button id=&quot;otherButton&quot; v-on:click=&quot;initButtons('other')&quot;&gt;Other&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import { initButtons } from &quot;.././globals.js&quot;;
+export default {
+  name: &quot;Header&quot;,
+  methods: {
+    initButtons,
+  },
+};
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+.header {
+  background-color: rgb(194, 79, 79);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-area: 1 / 1 / 2 / 2;
+  justify-items: center;
+}
+
+.headline {
+  display: grid;
+  color: white;
+  grid-area: 1 / 1 / 2 / 2;
+  align-items: center;
+  font-size: 36px;
+}
+
+.buttons {
+  grid-area: 2 / 1 / 3 / 2;
+}
+
+button {
+  font-family: Calibri;
+  font-size: 24px;
+  font-weight: bold;
+  width: 150px;
+  height: 40px;
+  background-color: rgb(106, 112, 160);
+  border-radius: 25px;
+}
+&lt;/style&gt;
+
+
+./src/components/Main.vue
+&lt;template&gt;
+  &lt;div id=&quot;main&quot;&gt;Bitte w&auml;hlen Sie eines der obigen Themen aus.&lt;/div&gt;
+&lt;/template&gt;
+      
+&lt;script&gt;
+export default {
+  name: &quot;Main&quot;,
+};
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+#main {
+  padding: 1em;
+  background-color: rgb(149, 210, 243);
+  grid-area: 1 / 2 / 2 / 3;
+  font-size: 20px;
+}
+&lt;/style&gt;
+
+
+./src/components/Nav.vue
+&lt;template&gt;
+  &lt;div id=&quot;nav&quot;&gt;&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &quot;Nav&quot;,
+};
+&lt;/script&gt;
+
+&lt;style&gt;
+#nav {
+  padding: 1em;
+  background-color: rgb(194, 130, 131);
+  grid-area: 1 / 1 / 2 / 2;
+}
+.buttons {
+  grid-area: 2 / 1 / 3 / 2;
+}
+
+button {
+  font-family: Calibri;
+  font-size: 24px;
+  font-weight: bold;
+  width: 150px;
+  height: 40px;
+  background-color: rgb(106, 112, 160);
+  border-radius: 25px;
+}
+&lt;/style&gt;
+
+
+./src/components/Side.vue
+&lt;template&gt;
+  &lt;div class=&quot;side&quot;&gt;Weitere Links&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &quot;Side&quot;,
+};
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+.side {
+  font-size: 18px;
+  color: white;
+  background-color: rgb(194, 130, 131);
+  grid-area: 1 / 3 / 2 / 4;
+  padding: 1em;
+}
+&lt;/style&gt;
+
+
+./public/index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot; /&gt;
+    &lt;title&gt;codesandbox&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
+
+./public/topics.json
+{
+  &quot;html&quot;: {
+    &quot;headings&quot;: {
+      &quot;content&quot;: &quot;Die &Uuml;berschriftenelemente bestehen aus sechs verschiedenen Leveln. &lt;h1&gt; ist die &Uuml;berschrift mit der h&ouml;chsten Gewichtung und &lt;h6&gt; mit der kleinsten. Ein &Uuml;berschriften-Element beschreibt das Thema des Bereiches, welcher der &Uuml;berschrift folgt. &Uuml;berschriften k&ouml;nnen auch verwendet werden, um ein Inhaltsverzeichnis f&uuml;r ein Dokument automatisch zu erstellen.&quot;,
+      &quot;references&quot;: [
+        &quot;https://developer.mozilla.org/de/docs/Web/HTML/Element/h1-h6&quot;
+      ]
+    },
+    &quot;paragraph&quot;: {
+      &quot;content&quot;: &quot;Das &lt;p&gt;-Element erzeugt einen Absatz, den zusammenh&auml;ngenden Abschnitt eines l&auml;ngeren Textes. In HTML kann &lt;p&gt; jedoch f&uuml;r jedwede Art von zu gruppierendem, zusammenh&auml;ngendem Inhalt genutzt werden, zum Beispiel Bilder oder Formularfelder.&quot;,
+      &quot;references&quot;: [&quot;https://developer.mozilla.org/de/docs/Web/HTML/Element/p&quot;]
+    },
+    &quot;block&quot;: {
+      &quot;content&quot;: &quot;Block- und Inline-Elemente sind die zwei urspr&uuml;nglichen Kategorien der darstellenden HTML-Elemente. Block-Elemente nehmen typischerweise die gesamte verf&uuml;gbare Breite ihres Elternelements ein und grenzen ihren Inhalt vertikal durch je einen Zeilenumbruch gegen&uuml;ber den vor- und nachfolgenden Elementen ab. Auf diese Weise erzeugen sie den rechteckigen Block, der ihnen den Namen gibt.&quot;,
+      &quot;references&quot;: [
+        &quot;https://developer.mozilla.org/de/docs/Web/HTML/Block-level_elements&quot;
+      ]
+    },
+    &quot;div&quot;: {
+      &quot;content&quot;: &quot;Das HTML-Element &lt;div&gt; (Englisch: HTML Document Division Element) ist ein allgemeiner Container f&uuml;r flie&szlig;enden Inhalt, dem keine semantische Bedeutung zugeordnet wird. Der wesentliche Unterschied zwischen &lt;div&gt; und anderen Block-Elementen wie beispielsweise &lt;article&gt; oder &lt;p&gt; ist die semantische Bedeutung bzw. das Fehlen dieser. W&auml;hrend &lt;article&gt; einen Artikel, einen eigenst&auml;ndigen Bereich eines Dokuments darstellt und &lt;p&gt; einen Textabsatz, gibt &lt;div&gt; seinem Inhalt keine Bedeutung. &lt;div&gt; sollte deshalb nur genutzt werden, falls kein anderes Block-Element eine zutreffendere Aussage macht. Der Einsatzbereich von &lt;div&gt; ist die Gruppierung von Elementen alleine zum Zweck der Gestaltung oder des programmatischen Zugriffs (mit Hilfe des class- oder id-Attributs), oder weil sie die gleichen Attribut-Werte besitzen, wie zum Beispiel das Attribut lang.&quot;,
+      &quot;references&quot;: [
+        &quot;https://developer.mozilla.org/de/docs/Web/HTML/Element/div&quot;
+      ]
+    }
+  },
+  &quot;css&quot;: {
+    &quot;selectors&quot;: {
+      &quot;content&quot;: &quot;Selektoren definieren, auf welche Elemente eine Reihe von CSS Regeln angewendet wird.&quot;,
+      &quot;references&quot;: [
+        &quot;https://developer.mozilla.org/de/docs/Web/CSS/CSS_Selectors&quot;
+      ]
+    },
+    &quot;colors&quot;: {
+      &quot;content&quot;: &quot;Der CSS Datentyp Color beschreibt eine Farbe im sRGB Farbraum. Eine Farbe kann auf eine von drei Arten beschrieben werden: Schl&uuml;sselworte, rgb und rgba, hsl und hsla. ...&quot;,
+      &quot;references&quot;: [&quot;https://developer.mozilla.org/de/docs/Web/CSS/Farben&quot;]
+    },
+    &quot;font-size&quot;: {
+      &quot;content&quot;: &quot;Die font-size-CSS-Eigenschaft spezifiziert die Schriftg&ouml;&szlig;e. Eine &Auml;nderung der Schriftgr&ouml;&szlig;e kann die Gr&ouml;&szlig;e anderer Partien beeinflussen, da sie dazu benutzt wird, den Wert der em- und ex-&lt;length&gt;-Einheiten zu berechnen.&quot;,
+      &quot;references&quot;: [&quot;https://developer.mozilla.org/de/docs/Web/CSS/font-size&quot;]
+    },
+    &quot;decoration&quot;: {
+      &quot;content&quot;: &quot;Die text-decoration CSS Eigenschaft wird dazu verwendet, die Textformatierung auf underline, overline, line-through oder blink zu setzen. Unter- und &Uuml;berstrichdekorationen werden unterhalb des Texts positioniert, Durchstreichungen &uuml;ber dem Text. Textdekorationen werden auf Unterelemente gezeichnet. Das bedeutet, dass es nicht m&ouml;glich ist, die Textdekoration, die f&uuml;r ein &uuml;bergeordnetes Element angegeben wurde, f&uuml;r ein Unterelement zu deaktivieren. Zum Beispiel w&uuml;rde in folgendem Markup &lt;p&gt;Dieser Text hat &lt;em&gt;ein paar hervorgehobene W&ouml;rter&lt;/em&gt;.&lt;/p&gt; die Stilregel p { text-decoration: underline; } den gesamten Absatz unterstreichen. Die Stilregel em { text-decoration: none; } w&uuml;rde nichts &auml;ndern; der gesamte Absatz w&auml;re immer noch unterstrichen. Jedoch w&uuml;rde die Regel em { text-decoration: overline; } eine zweite Dekoration f&uuml;r 'ein paar hervorgehobene W&ouml;rter' erscheinen lassen.&quot;,
+      &quot;references&quot;: [
+        &quot;https://developer.mozilla.org/de/docs/Web/CSS/text-decoration&quot;
+      ]
+    }
+  },
+  &quot;javascript&quot;: {
+    &quot;function&quot;: {
+      &quot;content&quot;: &quot;Funktionen sind ein Grundbaustein in JavaScript. Eine Funktion ist eine Prozedur - eine Reihe von Anweisungen, um eine Aufgabe auszuf&uuml;hren oder eine Wert auszurechnen. Um Funktionen zu verwenden, m&uuml;ssen diese im Scope (G&uuml;ltigkeitsbereich) deklariert werden, in dem sie ausgef&uuml;hrt werden soll.&quot;,
+      &quot;references&quot;: [
+        &quot;https://developer.mozilla.org/de/docs/Web/JavaScript/Guide/Funktionen&quot;
+      ]
+    },
+    &quot;object&quot;: {
+      &quot;content&quot;: &quot;Ein Objekt ist eine Sammlung von zusammenh&auml;ngenden Daten und/oder Funktionalit&auml;ten. Diese bestehen &uuml;blicherweise aus verschiedenen Variablen und Funktionen, die Eigenschaften und Methoden genannt werden, wenn sie sich innerhalb von Objekten befinden.&quot;,
+      &quot;references&quot;: [
+        &quot;https://developer.mozilla.org/de/docs/Learn/JavaScript/Objects/Basics&quot;
+      ]
+    },
+    &quot;split&quot;: {
+      &quot;content&quot;: &quot;Die split() Methode teilt ein String Objekt in ein Array von Strings auf, indem der String in Teilstrings zerteilt wird, wobei ein angegebenes Trennzeichen verwendet wird, um zu bestimmen, wo die Aufteilung erfolgen soll.&quot;,
+      &quot;references&quot;: [
+        &quot;https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/String/split&quot;
+      ]
+    },
+    &quot;log&quot;: {
+      &quot;content&quot;: &quot;Gibt eine Nachricht auf der Web-Konsole aus.&quot;,
+      &quot;references&quot;: [
+        &quot;https://developer.mozilla.org/de/docs/Web/API/Console/log&quot;
+      ]
+    }
+  },
+  &quot;other&quot;: {
+    &quot;PHP&quot;: {
+      &quot;content&quot;: &quot;PHP ist eine serverseitige Scriptsprache zur Entwicklung von webbasierten Anwendungen und dynamischen Webseiten.&quot;,
+      &quot;references&quot;: [&quot;https://developer.mozilla.org/de/docs/Glossary/PHP&quot;]
+    },
+    &quot;jQuery&quot;: {
+      &quot;content&quot;: &quot;jQuery is a JavaScript Library that focuses on simplifying DOM manipulation, AJAX calls, and Event handling. jQuery uses a format, $(selector).action() to assign an element(s) to an event. To explain it in detail, $(selector) will call jQuery to select selector element(s), and assign it to an event API called .action().&quot;,
+      &quot;references&quot;: [&quot;https://developer.mozilla.org/en-US/docs/Glossary/jQuery&quot;]
+    },
+    &quot;DOM&quot;: {
+      &quot;content&quot;: &quot;Das DOM (Document Object Model) ist eine API, die ein HTML oder XML Dokument darstellt und damit interagiert. Das DOM ist ein Modell, das im Browser geladen wird und stellt ein Dokument als einen Knotenbaum dar, in dem jeder Knoten einen Teil des Dokuments darstellt (z.B. ein Element, einen Text oder Kommentar). Das DOM ist eine der am h&auml;ufigsten genutzten APIs im Web (en-US), weil sie dem Browser erlaubt, auf ein Dokument zuzugreifen und damit zu interagieren. Knoten k&ouml;nnen erstellt, bewegt, ge&auml;ndert oder gel&ouml;scht werden. Event Handler k&ouml;nnen erstellt werden, um auf bestimmte Ereignisse zu warten. In den fr&uuml;hen Jahren des Internets gab es noch keine Spezifikation des DOM. Als die Browser begannen, JavaScript zu implementieren, wurde das DOM erschaffen. Diese erste Variante des DOM wird meistens DOM 0 genannt. Heute pflegt das WHATWG den DOM Living Standard.&quot;,
+      &quot;references&quot;: [&quot;https://developer.mozilla.org/de/docs/Glossary/DOM&quot;]
+    }
+  }
+}
+
+</pre>
+</details>
+
+	  </div>
+	  <div class="divider left-divider"></div>
+	  <div class="divider mid-divider"></div>
+	  <div class="divider right-divider"></div>
+	  <div class="divider bottom-divider"></div>
+	</div>
+	
+	<script src="https://unpkg.com/vue@3.0.5"></script>
+  <script>
+    const createMyApp = () => Vue.createApp({
+		template: '<div class="counter"><form v-on:input="onInput"><input v-model="text" type="text" id="input" />  </form><br /><output type="text" for="input"> {{ letters }} Buchstaben </output><output type="text" for="input"> {{ whitespaces }} Leerzeichen </output><output type="text" for="input"> {{ words }} Worte </output></div>',
+		name: "counter",
+		data() {
+			return {
+				text: "Geben Sie ihren Text hier ein.",
+				letters: 0,
+				whitespaces: 0,
+				words: 0,
+			};
+		},
+		methods: {
+			onInput: function () {
+			  let letterCount     = 0;
+			  let whitespaceCount = 0;
+			  let wordCount       = 0;
+			  let lastChar        = " ";
+
+			  this.text.split("").forEach((char) => {
+				if (char === " ") {
+				  whitespaceCount++;
+				  if (lastChar !== " ") {
+					wordCount++;
+				  }
+				} else {
+				  letterCount++;
+				}
+				lastChar = char;
+			  });
+			  if (lastChar !== " ") {
+				wordCount++;
+			  }
+			  this.letters = letterCount;
+			  this.whitespaces = whitespaceCount;
+			  this.words = wordCount;
+			},
+		}
+	})
+  
+	const app1 = createMyApp();
+	const app2 = createMyApp();
+	
+	app1.mount('#app1')
+	app2.mount('#app2')
+ 
+  </script>
+  </body>
+</html>
