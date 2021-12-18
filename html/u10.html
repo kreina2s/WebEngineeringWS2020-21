@@ -1,0 +1,198 @@
+<!--kreina2s-->
+<!DOCTYPE HTML>
+<html lang="de">
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="../css/flex.css">
+	<script src="../js/7_2.js"></script>
+    <title>Web Engineering (kreina2s)</title>
+  </head>
+  <body>
+    <div class="container">
+	  <div class="header">
+	    <a href="../index.html">
+		  <h1>Web Engineering</h1>
+		  <h2>von kreina2s</h2>
+		</a>
+	  </div>
+	  <div class="navigation">
+	    <a href="u1.html">Übung 1</a>
+	    <a href="u2.html">Übung 2</a>
+	    <a href="u3.html">Übung 3</a>
+	    <a href="u4.html">Übung 4</a>
+	    <a href="u5.html">Übung 5</a>
+	    <a href="u6.html">Übung 6</a>
+	    <a href="u7.html">Übung 7</a>
+	    <a href="u8.html">Übung 8</a>
+	    <a href="u9.html">Übung 9</a>
+	    <a href="u10.html">Übung 10</a>
+	    <a href="#">Übung 11</a>
+	    <a href="#">Übung 12</a>
+	    <a href="#">Übung 13</a>
+	  </div>
+	  <div class="content">
+	  <h1>TypeScript</h1>
+	    <h2>10.1 Static classes in TypeScript</h2>
+		<h3>Gibt es in TypeScript statische Klassen? Erläutern Sie den 
+		Unterschied von TypeScript zu anderen objekt-orientierten, 
+		statisch typisierten Programmiersprachen wie Java und C#.</h3>
+		<p>TypeScript hat kein Konstruct „static class“ im Gegensatz zu C# oder Java.</p>
+		<p>Dieses Kontrukt existiert nur, weil C# und Java alle Daten und Funktionen in eine Klasse 
+		zwingen. Da diese Einschränkung in TypeScript nicht existiert, gibt es keine Existenzberechtigung 
+		für statische Klassen. Eine Klasse mit einer einzigen Instanz wird normalerweise in TypeScript 
+		(oder Javascript) als Objekt repräsentiert.</p>
+		<p>Quelle: https://www.typescriptlang.org/docs/handbook/2/classes.html</p>
+		
+		<h2>10.2 Fehler finden mit TypeScript</h2>
+		<h3>Gegeben sei folgendes fehlerbehaftete JavaScript-Programm. Ergänzen Sie dieses 
+		um möglichst viele Typisierungen und übersetzen Sie es in ein TypeScript-Programm.</h3>
+	
+<pre>	
+const add = (x,y) => x+y;
+const equals = (x,y) => x===y;
+
+console.log( add(1,2) );
+console.log( add(true, true ) );
+console.log( add(true, false ) );
+var x = y = 1;
+console.log( add(equals(x,y), equals(y,x)) );
+</pre>
+
+		<h3>Was ist der Fehler in dem gegebenen JavaScript-Code?</h3>
+		<p>Der Fehler liegt in der Zeile "var x = y = 1;". Hier wird ein "y" referenziert, was noch nicht deklariert wurde.</p>
+		
+		<h3>Geben Sie Ihren TypeScript-Code an:</h3>
+
+<pre>
+const add = (x:any,y:any) => x+y;
+const equals = (x:any,y:any) => x===y;
+
+console.log( add(1,2) );
+console.log( add(true, true ) );
+console.log( add(true, false ) );
+
+let x: number = 1;
+let y: number = x;
+
+console.log( add(equals(x,y), equals(y,x)) );
+</pre>
+		
+		<h3>Welche Fehler meldet TypeScript?</h3>
+		<p>Wird der JavaScript Code in einen TypeScript Compiler geworfen, so meldet der Compiler insbesondere Fehler bezüglich 
+		Funktionsparameter. Diese müssen in Typescript typgebunden werden, erfolgt das nicht, wirft der Compiler folgende Fehler:</p>
+		
+<pre>
+Parameter 'x' implicitly has an 'any' type.
+Parameter 'y' implicitly has an 'any' type.
+Parameter 'x' implicitly has an 'any' type.
+Parameter 'y' implicitly has an 'any' type.
+</pre>
+
+		<p>Des Weiteren wurde die Variable "y" nicht deklariert, weshalb der Compiler sich ebenfalls beschwert:</p>
+<pre>
+Cannot find name 'y'. -> An jeder Stelle des Programms, wo y referenziert wird.
+</pre>
+
+		<h3>Geben Sie weitere Beispiele an, wie TypeScript bei der Fehlersuche helfen kann:</h3>
+		<p>Mit TypeScript lassen sich solche Fehler vermeiden, bei denen auf ein null bzw. undefiniertes 
+		Objekt zugegriffen wird (NullPointerException / NullReferenceException). Dies kann mittels strikter 
+		Null-Prüfung erreicht werden.</p>
+		
+		<h3>Schreiben Sie in TypeScript möglichst umfangreich statisch typisiert ein auf Deno ablauffähiges 
+		Programm server.ts, das Sie mit deno run --allow-net server.ts starten können, das die COVID-19-Fallzahlen 
+		in Deutschland einliest, Minimum, Maximum, Durchschnitt und Summe berechnet und diese auf einer Webseite 
+		ausgibt. </h3>
+		
+<details>
+	<summary>Code zum ausklappen</summary>
+<pre>
+import { copy } from "https://deno.land/std@0.117.0/streams/conversion.ts";
+
+// Functions for ...
+// Minimum
+const min = (arr:number[]) => {
+	var minimum:number = 9999999999999999999999999;
+	for(var val of arr) {
+	  if(val &lt; minimum) {
+		minimum = val;
+	  }
+	}
+	return minimum;
+}
+
+// Maximum
+const max = (arr:number[]) => {
+	var maximum:number = 0;
+	for(var val of arr) {
+	  if(val > maximum) {
+		maximum = val;
+	  }
+	}
+	return maximum;
+}
+
+// Average
+const avg = (arr:number[]) => {
+	var count:number = 0;
+	var n:number = 0;
+	for(var val of arr) {
+		n += val;
+		count++;
+	}
+	return (n/count);
+}
+
+// Sum
+const sum = (arr:number[]) => {
+	var n:number = 0;
+	for(var val of arr) {
+		n += val;
+	}
+	return n;
+}
+
+// Read in Covid Numbers
+const url:string = "http://www2.inf.h-brs.de/~kreina2s/txt/fallzahlen.txt";
+const textResponse = await fetch(url);
+const text:string = await textResponse.text();
+
+// Put them in an int array 
+var splitted:number[] = text.split(",").map(Number);
+
+// Setup server and write to body 
+// Code is taken from https://deno.land/manual/examples/http_server
+const server = Deno.listen({ port: 8080 });
+console.log(`HTTP webserver running.  Access it at:  http://localhost:8080/`);
+
+
+for await (const conn of server) {
+  serveHttp(conn);
+}
+
+async function serveHttp(conn: Deno.Conn) {
+  const httpConn = Deno.serveHttp(conn);
+  
+  for await (const requestEvent of httpConn) {
+    const body = 'COVID-19 Zahlen in Deutschland \nMinimum: ' + 
+	min(splitted) + '\nMaximum: ' + max(splitted) + '\nDurchschnitt: ' +
+	avg(splitted) + '\nGesamt: ' + sum(splitted);
+	
+    requestEvent.respondWith(
+      new Response(body, {
+        status: 200,
+      }),
+    );
+  }
+}
+</pre>
+</details>
+	  
+	  
+	  </div>
+	  <div class="divider left-divider"></div>
+	  <div class="divider mid-divider"></div>
+	  <div class="divider right-divider"></div>
+	  <div class="divider bottom-divider"></div>
+	</div>
+  </body>
+</html>
