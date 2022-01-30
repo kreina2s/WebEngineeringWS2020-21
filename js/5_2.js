@@ -1,3 +1,4 @@
+//Vollständige Eigenleistung
 var timer;
 
 window.onload = function() {

@@ -1,3 +1,4 @@
+//Vollständige Eigenleistung
 window.onload = function() {
 	var input = document.getElementById("topologyInput");
 	input.addEventListener("keydown", function(event) {

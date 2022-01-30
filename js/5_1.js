@@ -1,3 +1,4 @@
+//Vollständige Eigenleistung
 function startPerformance() {
 	for(var i=0; i<4; i++) 
 	{
